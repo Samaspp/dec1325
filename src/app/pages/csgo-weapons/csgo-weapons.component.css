@@ -1,0 +1,1406 @@
+/**
+ * CSGO WEAPONS PAGE STYLES
+ * 
+ * Design: CS:GO art style with pixelated aesthetic
+ * - Dark military color palette (#2b2d31, #1a1b1e)
+ * - Orange accent color (#ff6b35) for highlights
+ * - Pixelated rendering for retro FPS feel
+ * - Sharp geometric shapes
+ */
+
+.csgo-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #0a0a0f;
+  image-rendering: pixelated;
+  font-family: 'Courier New', monospace;
+}
+
+/* CS:GO HUD Overlay Corners */
+.csgo-hud-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.hud-corner {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+}
+
+.hud-corner::before,
+.hud-corner::after {
+  content: '';
+  position: absolute;
+  background: linear-gradient(90deg, #ff6b35 0%, transparent 100%);
+}
+
+.hud-corner.top-left {
+  top: 0;
+  left: 0;
+  border-top: 3px solid #ff6b35;
+  border-left: 3px solid #ff6b35;
+  background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, transparent 30%);
+}
+
+.hud-corner.top-right {
+  top: 0;
+  right: 0;
+  border-top: 3px solid #ff6b35;
+  border-right: 3px solid #ff6b35;
+  background: linear-gradient(225deg, rgba(255, 107, 53, 0.1) 0%, transparent 30%);
+}
+
+.hud-corner.bottom-left {
+  bottom: 0;
+  left: 0;
+  border-bottom: 3px solid #ff6b35;
+  border-left: 3px solid #ff6b35;
+  background: linear-gradient(45deg, rgba(255, 107, 53, 0.1) 0%, transparent 30%);
+}
+
+.hud-corner.bottom-right {
+  bottom: 0;
+  right: 0;
+  border-bottom: 3px solid #ff6b35;
+  border-right: 3px solid #ff6b35;
+  background: linear-gradient(315deg, rgba(255, 107, 53, 0.1) 0%, transparent 30%);
+}
+
+/* Tactical Scanner Lines */
+.tactical-scanner {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.scan-line {
+  position: absolute;
+  background: rgba(255, 107, 53, 0.3);
+  box-shadow: 0 0 10px rgba(255, 107, 53, 0.6);
+}
+
+.scan-line.horizontal {
+  width: 100%;
+  height: 2px;
+  animation: scanHorizontal 3s linear infinite;
+}
+
+.scan-line.vertical {
+  width: 2px;
+  height: 100%;
+  animation: scanVertical 4s linear infinite;
+}
+
+@keyframes scanHorizontal {
+  0% {
+    top: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+@keyframes scanVertical {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+/* ==================== BACKGROUND ==================== */
+.csgo-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: 
+    /* Tactical map grid overlay */
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 49px,
+      rgba(255, 107, 53, 0.08) 49px,
+      rgba(255, 107, 53, 0.08) 50px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0px,
+      transparent 49px,
+      rgba(255, 107, 53, 0.08) 49px,
+      rgba(255, 107, 53, 0.08) 50px
+    ),
+    /* Diagonal stripes for texture */
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 107, 53, 0.02) 10px,
+      rgba(255, 107, 53, 0.02) 20px
+    ),
+    /* Radial gradient for depth */
+    radial-gradient(ellipse at 50% 30%,
+      rgba(50, 50, 55, 1) 0%,
+      rgba(30, 30, 35, 1) 40%,
+      rgba(15, 15, 20, 1) 100%
+    ),
+    /* Dark vignette */
+    radial-gradient(ellipse at center,
+      transparent 0%,
+      transparent 40%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+  z-index: 0;
+  animation: backgroundPulse 4s ease-in-out infinite;
+}
+
+@keyframes backgroundPulse {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.05);
+  }
+}
+
+/* CS:GO Corner HUD Elements - More detailed */
+.csgo-background::before {
+  content: 'CT';
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  width: 250px;
+  height: 80px;
+  background: 
+    linear-gradient(90deg, 
+      rgba(255, 107, 53, 0.15) 0%,
+      rgba(255, 107, 53, 0.05) 50%,
+      transparent 100%
+    );
+  border-left: 4px solid #ff6b35;
+  border-bottom: 3px solid rgba(255, 107, 53, 0.5);
+  border-top: 1px solid rgba(255, 107, 53, 0.3);
+  pointer-events: none;
+  font-size: 32px;
+  font-weight: bold;
+  color: #ff6b35;
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  text-shadow: 
+    0 0 10px rgba(255, 107, 53, 0.8),
+    2px 2px 0 rgba(0, 0, 0, 0.8);
+  box-shadow: 
+    inset 0 0 20px rgba(255, 107, 53, 0.1),
+    0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.csgo-background::after {
+  content: 'TRAINING';
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 250px;
+  height: 80px;
+  background: 
+    linear-gradient(270deg, 
+      rgba(255, 107, 53, 0.15) 0%,
+      rgba(255, 107, 53, 0.05) 50%,
+      transparent 100%
+    );
+  border-right: 4px solid #ff6b35;
+  border-bottom: 3px solid rgba(255, 107, 53, 0.5);
+  border-top: 1px solid rgba(255, 107, 53, 0.3);
+  pointer-events: none;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ff6b35;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 15px;
+  text-shadow: 
+    0 0 10px rgba(255, 107, 53, 0.8),
+    2px 2px 0 rgba(0, 0, 0, 0.8);
+  box-shadow: 
+    inset 0 0 20px rgba(255, 107, 53, 0.1),
+    0 4px 10px rgba(0, 0, 0, 0.5);
+  letter-spacing: 3px;
+}
+
+/* ==================== TARGET SECTION ==================== */
+.target-section {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  z-index: 10;
+}
+
+
+
+/* Health Bar - CS:GO HUD Style */
+.health-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, 
+    rgba(43, 45, 49, 0.95) 0%,
+    rgba(26, 27, 30, 0.95) 100%
+  );
+  padding: 10px 18px;
+  border: 2px solid #ff6b35;
+  border-left: 4px solid #ff6b35;
+  box-shadow: 
+    0 0 20px rgba(255, 107, 53, 0.4),
+    inset 0 0 20px rgba(0, 0, 0, 0.5),
+    0 4px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.health-bar-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 107, 53, 0.5) 50%,
+    transparent 100%
+  );
+}
+
+.health-bar-label {
+  color: #ff6b35;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 
+    2px 2px 0 #000,
+    0 0 10px rgba(255, 107, 53, 0.5);
+  letter-spacing: 1px;
+}
+
+.health-bar-outer {
+  width: 220px;
+  height: 24px;
+  background: 
+    linear-gradient(0deg, #000 0%, #1a1a1a 100%);
+  border: 2px solid #333;
+  position: relative;
+  box-shadow: 
+    inset 0 2px 5px rgba(0, 0, 0, 0.8),
+    0 2px 0 rgba(255, 255, 255, 0.1);
+}
+
+.health-bar-inner {
+  height: 100%;
+  transition: width 0.3s ease, background-color 0.3s ease;
+  box-shadow: 
+    inset 0 0 10px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.5),
+    0 0 10px currentColor;
+  position: relative;
+}
+
+/* Animated shine effect on health bar */
+.health-bar-inner::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: healthShine 3s ease-in-out infinite;
+}
+
+@keyframes healthShine {
+  0%, 100% { left: -100%; }
+  50% { left: 100%; }
+}
+
+.health-bar-text {
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: 
+    2px 2px 0 #000,
+    0 0 5px rgba(255, 255, 255, 0.5);
+  min-width: 70px;
+  text-align: right;
+  letter-spacing: 1px;
+}
+
+/* Target Character */
+.target-character {
+  position: relative;
+  width: 120px;
+  height: 200px;
+  cursor: crosshair;
+  transition: opacity 0.3s ease;
+}
+
+.target-character.ghost {
+  opacity: 0.5;
+  filter: hue-rotate(200deg);
+  animation: float 2s ease-in-out infinite;
+}
+
+.target-character.shake {
+  animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0); }
+  25% { transform: translate(-5px, 2px); }
+  50% { transform: translate(5px, -2px); }
+  75% { transform: translate(-3px, -2px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+/* Character Parts - CS:GO Style CT Model */
+.character-head {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 45px;
+  background: 
+    /* Helmet */
+    linear-gradient(0deg, transparent 35px, #2a3f5f 35px),
+    /* Face */
+    linear-gradient(0deg, #d4a574 0%, #d4a574 35px, transparent 35px),
+    /* Visor reflection */
+    linear-gradient(90deg, transparent 12px, rgba(255,255,255,0.1) 12px, rgba(255,255,255,0.1) 28px, transparent 28px),
+    linear-gradient(0deg, transparent 38px, rgba(255,255,255,0.1) 38px, rgba(255,255,255,0.1) 42px, transparent 42px);
+  border: 2px solid #000;
+  box-shadow: 
+    inset 0 0 0 2px #3d5a80,
+    2px 2px 0 rgba(0, 0, 0, 0.5);
+  image-rendering: pixelated;
+}
+
+/* Eyes */
+.character-head::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  left: 10px;
+  width: 6px;
+  height: 8px;
+  background: #000;
+  box-shadow: 14px 0 0 #000;
+}
+
+/* Mouth/Nose area */
+.character-head::after {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 15px;
+  width: 10px;
+  height: 4px;
+  background: #8b6f5f;
+  border-radius: 0 0 2px 2px;
+}
+
+.character-body {
+  position: absolute;
+  top: 45px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 65px;
+  height: 85px;
+  background: 
+    /* Vest straps */
+    linear-gradient(90deg, transparent 8px, #1a1a1a 8px, #1a1a1a 12px, transparent 12px),
+    linear-gradient(90deg, transparent 53px, #1a1a1a 53px, #1a1a1a 57px, transparent 57px),
+    /* Tactical vest main */
+    linear-gradient(135deg, #3d5a80 0%, #2a3f5f 40%, #1a2332 100%),
+    /* Armor plates */
+    linear-gradient(0deg, transparent 20px, rgba(0,0,0,0.3) 20px, rgba(0,0,0,0.3) 65px, transparent 65px),
+    linear-gradient(90deg, transparent 20px, rgba(0,0,0,0.2) 20px, rgba(0,0,0,0.2) 45px, transparent 45px);
+  border: 2px solid #000;
+  box-shadow: 
+    inset 0 0 0 3px #293f5f,
+    inset 5px 5px 0 rgba(255,255,255,0.05),
+    2px 2px 0 rgba(0, 0, 0, 0.5);
+  image-rendering: pixelated;
+}
+
+/* Tactical pouches */
+.character-body::before {
+  content: '';
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 18px;
+  background: #1a2332;
+  border: 2px solid #000;
+  box-shadow: inset 0 2px 0 rgba(0,0,0,0.3);
+}
+
+/* Arms */
+.character-body::after {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: -8px;
+  width: 12px;
+  height: 50px;
+  background: #2a3f5f;
+  border: 2px solid #000;
+  box-shadow: 
+    69px 0 0 #2a3f5f,
+    69px 0 0 0 2px #000;
+}
+
+.character-legs {
+  position: absolute;
+  top: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 55px;
+  height: 75px;
+  background: 
+    /* Tactical pants */
+    linear-gradient(135deg, #3a4a3a 0%, #2a3a2a 50%, #1a2a1a 100%),
+    /* Cargo pockets */
+    linear-gradient(0deg, transparent 20px, rgba(0,0,0,0.3) 20px, rgba(0,0,0,0.3) 45px, transparent 45px);
+  border: 2px solid #000;
+  box-shadow: 
+    inset 0 0 0 2px #2f3f2f,
+    2px 2px 0 rgba(0, 0, 0, 0.5);
+  image-rendering: pixelated;
+}
+
+/* Leg separation */
+.character-legs::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(0deg, #000 0%, #000 100%);
+  box-shadow: 0 0 0 1px #1a1a1a;
+}
+
+/* Combat boots */
+.character-legs::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 8px;
+  width: 16px;
+  height: 10px;
+  background: #1a1a1a;
+  border: 2px solid #000;
+  box-shadow: 27px 0 0 #1a1a1a, 27px 0 0 0 2px #000;
+}
+
+/* Blood Effect */
+.blood-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, 
+    rgba(255, 0, 0, 0.6) 0%, 
+    rgba(139, 0, 0, 0.4) 50%, 
+    transparent 70%);
+  animation: bloodSplat 0.3s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes bloodSplat {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; }
+}
+
+/* Explosion Effect */
+.explosion-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle,
+    rgba(255, 165, 0, 0.9) 0%,
+    rgba(255, 69, 0, 0.7) 30%,
+    rgba(255, 0, 0, 0.5) 60%,
+    transparent 100%);
+  animation: explode 0.8s ease forwards;
+  pointer-events: none;
+  box-shadow: 0 0 60px rgba(255, 165, 0, 0.8);
+}
+
+@keyframes explode {
+  0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+  50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+  100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
+}
+
+/* Soul Animation - CS:GO Style Ghost */
+.soul-rising {
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 100px;
+  cursor: pointer;
+  animation: soulRise 3s ease-out forwards;
+  z-index: 200;
+}
+
+@keyframes soulRise {
+  0% { 
+    top: 50%;
+    opacity: 0;
+    transform: translateX(-50%) scale(0.5);
+  }
+  20% {
+    opacity: 1;
+  }
+  100% { 
+    top: -150px;
+    opacity: 0.8;
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+/* Soul body - glowing ethereal shape */
+.soul-body {
+  width: 100%;
+  height: 100%;
+  background: 
+    /* Glow effect */
+    radial-gradient(ellipse at 50% 30%, 
+      rgba(135, 206, 250, 0.9) 0%,
+      rgba(100, 149, 237, 0.7) 30%,
+      rgba(65, 105, 225, 0.5) 60%,
+      transparent 100%
+    );
+  filter: blur(1px);
+  animation: soulPulse 1.5s ease-in-out infinite;
+  position: relative;
+}
+
+@keyframes soulPulse {
+  0%, 100% { 
+    transform: scale(1);
+    filter: blur(1px) brightness(1);
+  }
+  50% { 
+    transform: scale(1.1);
+    filter: blur(2px) brightness(1.3);
+  }
+}
+
+/* Soul face features */
+.soul-face {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+}
+
+/* Ghost eyes */
+.soul-face::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 8px;
+  width: 8px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  box-shadow: 
+    16px 0 0 rgba(255, 255, 255, 0.9),
+    0 0 10px rgba(135, 206, 250, 0.8),
+    16px 0 10px rgba(135, 206, 250, 0.8);
+}
+
+/* Ghost mouth */
+.soul-face::after {
+  content: '';
+  position: absolute;
+  top: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 8px;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 0 8px rgba(135, 206, 250, 0.6);
+}
+
+/* Soul tail - wispy bottom */
+.soul-tail {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 40px;
+  background: 
+    radial-gradient(ellipse at top,
+      rgba(100, 149, 237, 0.6) 0%,
+      rgba(65, 105, 225, 0.4) 40%,
+      transparent 100%
+    );
+  filter: blur(3px);
+  animation: soulWisp 1.2s ease-in-out infinite;
+}
+
+@keyframes soulWisp {
+  0%, 100% { 
+    transform: translateX(-50%) scale(1, 1);
+    opacity: 0.6;
+  }
+  50% { 
+    transform: translateX(-50%) scale(1.2, 0.8);
+    opacity: 0.8;
+  }
+}
+
+/* Click indicator on soul */
+.soul-rising:hover .soul-body {
+  filter: blur(1px) brightness(1.5);
+  transform: scale(1.15);
+}
+
+.soul-rising:hover::before {
+  content: 'Click to continue...';
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #87ceeb;
+  font-size: 12px;
+  white-space: nowrap;
+  text-shadow: 
+    0 0 10px rgba(135, 206, 250, 0.8),
+    2px 2px 0 #000;
+  animation: clickPrompt 0.8s ease-in-out infinite;
+}
+
+@keyframes clickPrompt {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 1; }
+}
+
+/* Applause Hands - for headshots */
+.applause-hands {
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 20px;
+  font-size: 40px;
+  animation: applause 0.5s ease infinite;
+  z-index: 150;
+}
+
+@keyframes applause {
+  0%, 100% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.2); }
+}
+
+.hand-left,
+.hand-right {
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+/* Dialogue Box */
+.dialogue-box {
+  position: relative;
+  background: #2b2d31;
+  border: 3px solid #ff6b35;
+  padding: 12px 20px;
+  min-width: 300px;
+  max-width: 400px;
+  box-shadow: 
+    0 0 20px rgba(255, 107, 53, 0.3),
+    4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.dialogue-arrow {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-bottom: 12px solid #ff6b35;
+}
+
+.dialogue-text {
+  color: #fff;
+  font-size: 14px;
+  text-align: center;
+  margin: 0;
+  text-shadow: 2px 2px 0 #000;
+  line-height: 1.4;
+}
+
+/* ==================== WEAPON EFFECTS ==================== */
+.muzzle-flash {
+  position: absolute;
+  bottom: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle,
+    rgba(255, 255, 0, 0.9) 0%,
+    rgba(255, 165, 0, 0.7) 40%,
+    transparent 70%);
+  animation: flash 0.15s ease forwards;
+  pointer-events: none;
+  z-index: 100;
+}
+
+@keyframes flash {
+  0% { opacity: 1; transform: translateX(-50%) scale(0.5); }
+  100% { opacity: 0; transform: translateX(-50%) scale(1.5); }
+}
+
+.slash-effect {
+  position: absolute;
+  top: 40%;
+  left: 40%;
+  width: 200px;
+  height: 8px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    #fff 20%,
+    #ff6b35 50%,
+    #fff 80%,
+    transparent 100%);
+  transform: rotate(-45deg);
+  animation: slash 0.5s ease forwards;
+  pointer-events: none;
+  z-index: 100;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes slash {
+  0% { transform: rotate(-45deg) translateX(-200px); opacity: 1; }
+  100% { transform: rotate(-45deg) translateX(200px); opacity: 0; }
+}
+
+/* ==================== WEAPON PANEL ==================== */
+.weapon-panel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: 
+    /* Scanline effect */
+    repeating-linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.15) 0px,
+      rgba(0, 0, 0, 0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    /* Main gradient */
+    linear-gradient(180deg, 
+      rgba(20, 20, 23, 0.97) 0%, 
+      rgba(43, 45, 49, 0.98) 50%,
+      rgba(26, 27, 30, 0.99) 100%
+    );
+  border-top: 4px solid #ff6b35;
+  box-shadow: 
+    0 -5px 30px rgba(255, 107, 53, 0.4),
+    inset 0 4px 0 rgba(255, 107, 53, 0.2),
+    inset 0 0 50px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 25px;
+  z-index: 50;
+}
+
+/* CS:GO style corner accent */
+.weapon-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg,
+    #ff6b35 0%,
+    transparent 100%
+  );
+  box-shadow: 0 0 10px rgba(255, 107, 53, 0.6);
+}
+
+.weapon-panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(270deg,
+    #ff6b35 0%,
+    transparent 100%
+  );
+  box-shadow: 0 0 10px rgba(255, 107, 53, 0.6);
+}
+
+/* Selected Weapon Display - CS:GO HUD Style */
+.selected-weapon-display {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 15px 18px;
+  background: 
+    linear-gradient(135deg,
+      rgba(26, 27, 30, 0.95) 0%,
+      rgba(20, 20, 23, 0.95) 100%
+    );
+  border: 2px solid #ff6b35;
+  border-left: 5px solid #ff6b35;
+  min-width: 200px;
+  box-shadow: 
+    0 0 20px rgba(255, 107, 53, 0.5),
+    inset 0 0 20px rgba(0, 0, 0, 0.6),
+    0 4px 0 rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+/* Top accent line */
+.selected-weapon-display::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    #ff6b35 0%,
+    rgba(255, 107, 53, 0.3) 100%
+  );
+}
+
+/* "EQUIPPED" label */
+.selected-weapon-display::after {
+  content: 'EQUIPPED';
+  position: absolute;
+  top: -10px;
+  right: 10px;
+  font-size: 9px;
+  color: #ff6b35;
+  background: #1a1b1e;
+  padding: 2px 8px;
+  border: 1px solid #ff6b35;
+  text-shadow: 1px 1px 0 #000;
+  letter-spacing: 1px;
+}
+
+.weapon-name {
+  color: #ff6b35;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-shadow: 
+    2px 2px 0 #000,
+    0 0 10px rgba(255, 107, 53, 0.6);
+  letter-spacing: 1px;
+}
+
+.weapon-stats {
+  display: flex;
+  gap: 18px;
+}
+
+.stat {
+  color: #e0e0e0;
+  font-size: 13px;
+  text-shadow: 
+    1px 1px 0 #000,
+    0 0 5px rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.5px;
+  padding: 3px 8px;
+  background: rgba(255, 107, 53, 0.1);
+  border-left: 2px solid rgba(255, 107, 53, 0.5);
+}
+
+/* Scroll Buttons */
+.scroll-btn {
+  background: #2b2d31;
+  border: 3px solid #ff6b35;
+  color: #ff6b35;
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 0 10px rgba(255, 107, 53, 0.3);
+}
+
+.scroll-btn:hover {
+  background: #ff6b35;
+  color: #000;
+  box-shadow: 0 0 20px rgba(255, 107, 53, 0.6);
+  transform: scale(1.1);
+}
+
+.scroll-btn:active {
+  transform: scale(0.95);
+}
+
+/* Weapon Inventory Scroll */
+.weapon-inventory-scroll {
+  flex: 1;
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 10px 0;
+  scroll-behavior: smooth;
+}
+
+.weapon-inventory-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.weapon-inventory-scroll::-webkit-scrollbar-track {
+  background: #1a1b1e;
+}
+
+.weapon-inventory-scroll::-webkit-scrollbar-thumb {
+  background: #ff6b35;
+  border-radius: 4px;
+}
+
+/* Weapon Card - CS:GO Inventory Style */
+.weapon-card {
+  min-width: 130px;
+  height: 150px;
+  background: 
+    linear-gradient(135deg,
+      rgba(43, 45, 49, 0.9) 0%,
+      rgba(26, 27, 30, 0.9) 100%
+    );
+  border: 2px solid #3a3a3a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding: 12px;
+  box-shadow: 
+    inset 0 0 20px rgba(0, 0, 0, 0.5),
+    0 4px 0 rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+/* Card corner accents */
+.weapon-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  border-top: 2px solid #555;
+  border-left: 2px solid #555;
+  opacity: 0.5;
+  transition: all 0.25s ease;
+}
+
+.weapon-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 20px;
+  height: 20px;
+  border-bottom: 2px solid #555;
+  border-right: 2px solid #555;
+  opacity: 0.5;
+  transition: all 0.25s ease;
+}
+
+.weapon-card:hover {
+  border-color: #ff6b35;
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 
+    inset 0 0 20px rgba(255, 107, 53, 0.2),
+    0 8px 0 rgba(0, 0, 0, 0.4),
+    0 0 25px rgba(255, 107, 53, 0.5);
+}
+
+.weapon-card:hover::before,
+.weapon-card:hover::after {
+  border-color: #ff6b35;
+  opacity: 1;
+}
+
+.weapon-card.selected {
+  border-color: #ff6b35;
+  border-width: 3px;
+  background: 
+    linear-gradient(135deg,
+      rgba(255, 107, 53, 0.2) 0%,
+      rgba(43, 45, 49, 0.95) 50%,
+      rgba(26, 27, 30, 0.95) 100%
+    );
+  box-shadow: 
+    inset 0 0 30px rgba(255, 107, 53, 0.3),
+    0 4px 0 rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(255, 107, 53, 0.7),
+    0 0 60px rgba(255, 107, 53, 0.4);
+  transform: translateY(-5px) scale(1.08);
+}
+
+.weapon-card.selected::before,
+.weapon-card.selected::after {
+  border-color: #ff6b35;
+  opacity: 1;
+  filter: drop-shadow(0 0 5px rgba(255, 107, 53, 0.8));
+}
+
+/* Weapon Icon - Pixelated CS:GO Style */
+.weapon-icon {
+  width: 80px;
+  height: 50px;
+  position: relative;
+  image-rendering: pixelated;
+  transform-origin: center;
+}
+
+/* AK-47 - Iconic brown rifle */
+.weapon-ak47 {
+  background: 
+    /* Magazine */
+    linear-gradient(90deg, transparent 20px, #654321 20px, #654321 28px, transparent 28px),
+    linear-gradient(0deg, transparent 35px, #654321 35px, #654321 45px, transparent 45px),
+    /* Barrel */
+    linear-gradient(0deg, transparent 18px, #2a2a2a 18px, #2a2a2a 22px, transparent 22px),
+    linear-gradient(90deg, transparent 35px, #2a2a2a 35px, #2a2a2a 75px, transparent 75px),
+    /* Body */
+    linear-gradient(90deg, transparent 15px, #8b4513 15px, #8b4513 60px, transparent 60px),
+    linear-gradient(0deg, transparent 22px, #8b4513 22px, #8b4513 35px, transparent 35px),
+    /* Stock */
+    linear-gradient(90deg, transparent 0px, #654321 0px, #654321 20px, transparent 20px),
+    linear-gradient(0deg, transparent 25px, #654321 25px, #654321 32px, transparent 32px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* M4A4 - Tactical black rifle */
+.weapon-m4a4 {
+  background:
+    /* Barrel */
+    linear-gradient(0deg, transparent 18px, #1a1a1a 18px, #1a1a1a 22px, transparent 22px),
+    linear-gradient(90deg, transparent 30px, #1a1a1a 30px, #1a1a1a 75px, transparent 75px),
+    /* Body */
+    linear-gradient(90deg, transparent 20px, #2f4f4f 20px, #2f4f4f 55px, transparent 55px),
+    linear-gradient(0deg, transparent 22px, #2f4f4f 22px, #2f4f4f 35px, transparent 35px),
+    /* Magazine */
+    linear-gradient(90deg, transparent 25px, #444 25px, #444 32px, transparent 32px),
+    linear-gradient(0deg, transparent 35px, #444 35px, #444 48px, transparent 48px),
+    /* Stock */
+    linear-gradient(90deg, transparent 0px, #2a2a2a 0px, #2a2a2a 22px, transparent 22px),
+    linear-gradient(0deg, transparent 24px, #2a2a2a 24px, #2a2a2a 30px, transparent 30px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* M4A1-S - Silenced rifle */
+.weapon-m4a1s {
+  background:
+    /* Silencer */
+    linear-gradient(0deg, transparent 16px, #555 16px, #555 24px, transparent 24px),
+    linear-gradient(90deg, transparent 60px, #555 60px, #555 80px, transparent 80px),
+    /* Barrel */
+    linear-gradient(0deg, transparent 18px, #1a1a1a 18px, #1a1a1a 22px, transparent 22px),
+    linear-gradient(90deg, transparent 30px, #1a1a1a 30px, #1a1a1a 62px, transparent 62px),
+    /* Body */
+    linear-gradient(90deg, transparent 18px, #778899 18px, #778899 50px, transparent 50px),
+    linear-gradient(0deg, transparent 22px, #778899 22px, #778899 35px, transparent 35px),
+    /* Magazine */
+    linear-gradient(90deg, transparent 24px, #444 24px, #444 30px, transparent 30px),
+    linear-gradient(0deg, transparent 35px, #444 35px, #444 47px, transparent 47px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* AWP - Long sniper rifle */
+.weapon-awp {
+  background:
+    /* Scope */
+    linear-gradient(90deg, transparent 32px, #222 32px, #222 40px, transparent 40px),
+    linear-gradient(0deg, transparent 14px, #222 14px, #222 26px, transparent 26px),
+    /* Barrel - very long */
+    linear-gradient(0deg, transparent 18px, #2d4a1f 18px, #2d4a1f 22px, transparent 22px),
+    linear-gradient(90deg, transparent 40px, #2d4a1f 40px, #2d4a1f 80px, transparent 80px),
+    /* Body */
+    linear-gradient(90deg, transparent 15px, #556b2f 15px, #556b2f 45px, transparent 45px),
+    linear-gradient(0deg, transparent 20px, #556b2f 20px, #556b2f 32px, transparent 32px),
+    /* Magazine */
+    linear-gradient(90deg, transparent 20px, #3a3a3a 20px, #3a3a3a 26px, transparent 26px),
+    linear-gradient(0deg, transparent 32px, #3a3a3a 32px, #3a3a3a 45px, transparent 45px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Desert Eagle - Large pistol */
+.weapon-deagle {
+  background:
+    /* Barrel */
+    linear-gradient(0deg, transparent 20px, #8b6508 20px, #8b6508 25px, transparent 25px),
+    linear-gradient(90deg, transparent 35px, #8b6508 35px, #8b6508 60px, transparent 60px),
+    /* Body - golden */
+    linear-gradient(90deg, transparent 20px, #b8860b 20px, #b8860b 45px, transparent 45px),
+    linear-gradient(0deg, transparent 22px, #b8860b 22px, #b8860b 35px, transparent 35px),
+    /* Grip */
+    linear-gradient(90deg, transparent 18px, #654321 18px, #654321 28px, transparent 28px),
+    linear-gradient(0deg, transparent 30px, #654321 30px, #654321 42px, transparent 42px),
+    /* Trigger guard */
+    linear-gradient(90deg, transparent 25px, #1a1a1a 25px, #1a1a1a 30px, transparent 30px),
+    linear-gradient(0deg, transparent 28px, #1a1a1a 28px, #1a1a1a 33px, transparent 33px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Glock-18 - Small black pistol */
+.weapon-glock {
+  background:
+    /* Barrel */
+    linear-gradient(0deg, transparent 22px, #000 22px, #000 26px, transparent 26px),
+    linear-gradient(90deg, transparent 35px, #000 35px, #000 55px, transparent 55px),
+    /* Slide */
+    linear-gradient(90deg, transparent 25px, #1a1a1a 25px, #1a1a1a 50px, transparent 50px),
+    linear-gradient(0deg, transparent 20px, #1a1a1a 20px, #1a1a1a 28px, transparent 28px),
+    /* Grip */
+    linear-gradient(90deg, transparent 22px, #333 22px, #333 35px, transparent 35px),
+    linear-gradient(0deg, transparent 28px, #333 28px, #333 42px, transparent 42px),
+    /* Magazine */
+    linear-gradient(90deg, transparent 26px, #222 26px, #222 31px, transparent 31px),
+    linear-gradient(0deg, transparent 38px, #222 38px, #222 48px, transparent 48px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* MP9 - Compact SMG */
+.weapon-mp9 {
+  background:
+    /* Barrel */
+    linear-gradient(0deg, transparent 20px, #1a1a1a 20px, #1a1a1a 24px, transparent 24px),
+    linear-gradient(90deg, transparent 35px, #1a1a1a 35px, #1a1a1a 65px, transparent 65px),
+    /* Body */
+    linear-gradient(90deg, transparent 20px, #4682b4 20px, #4682b4 50px, transparent 50px),
+    linear-gradient(0deg, transparent 22px, #4682b4 22px, #4682b4 32px, transparent 32px),
+    /* Magazine */
+    linear-gradient(90deg, transparent 24px, #27496d 24px, #27496d 30px, transparent 30px),
+    linear-gradient(0deg, transparent 32px, #27496d 32px, #27496d 46px, transparent 46px),
+    /* Stock */
+    linear-gradient(90deg, transparent 10px, #2a2a2a 10px, #2a2a2a 22px, transparent 22px),
+    linear-gradient(0deg, transparent 24px, #2a2a2a 24px, #2a2a2a 28px, transparent 28px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Nova - Pump shotgun */
+.weapon-nova {
+  background:
+    /* Barrel - wide */
+    linear-gradient(0deg, transparent 16px, #6b3410 16px, #6b3410 24px, transparent 24px),
+    linear-gradient(90deg, transparent 30px, #6b3410 30px, #6b3410 70px, transparent 70px),
+    /* Pump */
+    linear-gradient(90deg, transparent 35px, #8b4513 35px, #8b4513 45px, transparent 45px),
+    linear-gradient(0deg, transparent 24px, #8b4513 24px, #8b4513 30px, transparent 30px),
+    /* Body */
+    linear-gradient(90deg, transparent 18px, #a0522d 18px, #a0522d 45px, transparent 45px),
+    linear-gradient(0deg, transparent 22px, #a0522d 22px, #a0522d 35px, transparent 35px),
+    /* Stock */
+    linear-gradient(90deg, transparent 0px, #654321 0px, #654321 20px, transparent 20px),
+    linear-gradient(0deg, transparent 25px, #654321 25px, #654321 32px, transparent 32px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Knife - Blade shape */
+.weapon-knife {
+  background:
+    /* Blade */
+    linear-gradient(45deg, transparent 30px, #c0c0c0 30px, #c0c0c0 35px, transparent 35px),
+    linear-gradient(90deg, transparent 35px, #c0c0c0 35px, #c0c0c0 70px, transparent 70px),
+    linear-gradient(0deg, transparent 18px, #c0c0c0 18px, #c0c0c0 28px, transparent 28px),
+    /* Edge highlight */
+    linear-gradient(90deg, transparent 35px, #fff 35px, #fff 71px, transparent 71px),
+    linear-gradient(0deg, transparent 18px, #fff 18px, #fff 20px, transparent 20px),
+    /* Handle */
+    linear-gradient(90deg, transparent 18px, #1a1a1a 18px, #1a1a1a 40px, transparent 40px),
+    linear-gradient(0deg, transparent 22px, #1a1a1a 22px, #1a1a1a 35px, transparent 35px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Bayonet - Tactical knife */
+.weapon-bayonet {
+  background:
+    /* Blade - curved */
+    linear-gradient(50deg, transparent 28px, #d4af37 28px, #d4af37 33px, transparent 33px),
+    linear-gradient(90deg, transparent 35px, #d4af37 35px, #d4af37 68px, transparent 68px),
+    linear-gradient(0deg, transparent 16px, #d4af37 16px, #d4af37 26px, transparent 26px),
+    /* Edge */
+    linear-gradient(90deg, transparent 35px, #fff 35px, #fff 69px, transparent 69px),
+    linear-gradient(0deg, transparent 16px, #fff 16px, #fff 18px, transparent 18px),
+    /* Handle - black */
+    linear-gradient(90deg, transparent 15px, #2a2a2a 15px, #2a2a2a 38px, transparent 38px),
+    linear-gradient(0deg, transparent 20px, #2a2a2a 20px, #2a2a2a 32px, transparent 32px);
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* HE Grenade - Olive green sphere */
+.weapon-hegrenade {
+  background:
+    /* Main body */
+    radial-gradient(circle at 40% 40%, #8fbc8f 0%, #556b2f 50%, #3a4a1f 100%),
+    /* Pin area */
+    linear-gradient(90deg, transparent 0px, #6b8e23 0px, #6b8e23 30px, transparent 30px),
+    linear-gradient(0deg, transparent 0px, #6b8e23 0px, #6b8e23 15px, transparent 15px);
+  border-radius: 50%;
+  position: relative;
+  box-shadow: 
+    inset -5px -5px 10px rgba(0, 0, 0, 0.4),
+    2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.weapon-hegrenade::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 8px;
+  width: 10px;
+  height: 3px;
+  background: #ffd700;
+  box-shadow: 1px 1px 0 #000;
+}
+
+/* Molotov - Orange bottle */
+.weapon-molotov {
+  background:
+    /* Rag/wick */
+    linear-gradient(90deg, transparent 20px, #f5deb3 20px, #f5deb3 30px, transparent 30px),
+    linear-gradient(0deg, transparent 0px, #f5deb3 0px, #f5deb3 12px, transparent 12px),
+    /* Bottle neck */
+    linear-gradient(90deg, transparent 22px, #8b4513 22px, #8b4513 28px, transparent 28px),
+    linear-gradient(0deg, transparent 12px, #8b4513 12px, #8b4513 20px, transparent 20px),
+    /* Bottle body */
+    radial-gradient(ellipse at center, #ff6347 0%, #ff4500 40%, #8b0000 100%),
+    linear-gradient(90deg, transparent 15px, #ff4500 15px, #ff4500 35px, transparent 35px),
+    linear-gradient(0deg, transparent 18px, #ff4500 18px, #ff4500 45px, transparent 45px);
+  border-radius: 35%;
+  box-shadow: 
+    inset -4px -4px 8px rgba(0, 0, 0, 0.5),
+    2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+/* Weapon Card Name */
+.weapon-card-name {
+  color: #fff;
+  font-size: 11px;
+  text-align: center;
+  text-shadow: 1px 1px 0 #000;
+  font-weight: bold;
+}
+
+/* Weapon Category Badge */
+.weapon-category {
+  color: #ff6b35;
+  font-size: 9px;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 0 #000;
+  letter-spacing: 1px;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .target-character {
+    width: 100px;
+    height: 160px;
+  }
+
+  .character-head {
+    width: 32px;
+    height: 32px;
+  }
+
+  .character-body {
+    width: 48px;
+    height: 64px;
+  }
+
+  .character-legs {
+    width: 40px;
+    height: 64px;
+  }
+
+  .weapon-panel {
+    height: 140px;
+  }
+
+  .weapon-card {
+    min-width: 100px;
+    height: 110px;
+  }
+
+  .weapon-icon {
+    width: 50px;
+    height: 32px;
+  }
+}

@@ -1,0 +1,600 @@
+/**
+ * BIRTHDAY HOME PAGE STYLES
+ * 
+ * LLD: Pixelated art styling for birthday celebration page
+ * 
+ * Design Theme:
+ * - Retro pixelated aesthetic throughout
+ * - Vibrant colors with 8-bit feel
+ * - Animated decorations and background
+ * - Responsive layout for all screen sizes
+ * 
+ * Key Sections:
+ * 1. Container and background
+ * 2. Typography (pixelated fonts)
+ * 3. Button styling
+ * 4. Decorative elements
+ * 5. Animations
+ */
+
+/* =================================
+   MAIN CONTAINER
+   ================================= */
+
+.birthday-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background: #1a1a2e;
+  font-family: 'Courier New', monospace;
+}
+
+/* =================================
+   PIXELATED BACKGROUND
+   ================================= */
+
+.pixelated-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(233, 69, 96, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(0, 217, 255, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(255, 215, 0, 0.2) 0%, transparent 50%),
+    linear-gradient(135deg, #0f3460 0%, #16213e 30%, #1a1a2e 60%, #0f1419 100%);
+  
+  /* Pixelated rendering */
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  
+  animation: backgroundShift 15s ease-in-out infinite alternate;
+}
+
+@keyframes backgroundShift {
+  0% {
+    filter: hue-rotate(0deg) brightness(1);
+  }
+  100% {
+    filter: hue-rotate(30deg) brightness(1.1);
+  }
+}
+
+/* Animated pixel grid overlay */
+.pixel-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 20px,
+      rgba(255, 255, 255, 0.03) 20px,
+      rgba(255, 255, 255, 0.03) 21px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 20px,
+      rgba(255, 255, 255, 0.03) 20px,
+      rgba(255, 255, 255, 0.03) 21px
+    );
+  animation: gridScroll 20s linear infinite;
+}
+
+@keyframes gridScroll {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(20px, 20px);
+  }
+}
+
+/* =================================
+   BALLOONS LAYER
+   ================================= */
+
+.balloons-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.balloons-layer app-balloon {
+  pointer-events: all;
+}
+
+/* =================================
+   CONTENT OVERLAY
+   ================================= */
+
+.content-overlay {
+  position: relative;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  pointer-events: none;
+}
+
+.content-overlay > * {
+  pointer-events: all;
+}
+
+/* =================================
+   BIRTHDAY MESSAGE
+   ================================= */
+
+.birthday-message {
+  text-align: center;
+  padding: 40px 50px;
+  background: 
+    linear-gradient(135deg, rgba(233, 69, 96, 0.15) 0%, rgba(0, 217, 255, 0.15) 100%),
+    rgba(0, 0, 0, 0.8);
+  border: 4px solid #e94560;
+  border-radius: 0; /* Sharp corners for pixel style */
+  box-shadow: 
+    0 0 0 2px #000,
+    0 0 30px rgba(233, 69, 96, 0.7),
+    0 0 60px rgba(0, 217, 255, 0.4),
+    inset 0 0 30px rgba(233, 69, 96, 0.3),
+    inset 0 0 60px rgba(255, 215, 0, 0.1);
+  
+  /* Pixelated rendering */
+  image-rendering: pixelated;
+  
+  animation: messageFloat 3s ease-in-out infinite, borderPulse 2s ease-in-out infinite alternate;
+  
+  position: relative;
+  overflow: hidden;
+}
+
+.birthday-message::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 215, 0, 0.1) 50%,
+    transparent 70%
+  );
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%) translateY(-100%) rotate(45deg);
+  }
+  100% {
+    transform: translateX(100%) translateY(100%) rotate(45deg);
+  }
+}
+
+@keyframes borderPulse {
+  0% {
+    border-color: #e94560;
+  }
+  50% {
+    border-color: #ff6b81;
+  }
+  100% {
+    border-color: #00d9ff;
+  }
+}
+
+@keyframes messageFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Pixelated text styling */
+.pixel-text {
+  image-rendering: pixelated;
+  text-shadow: 
+    2px 2px 0 #000,
+    4px 4px 0 rgba(0, 0, 0, 0.5);
+  letter-spacing: 3px;
+}
+
+.main-title {
+  font-size: 4rem;
+  color: #e94560;
+  margin: 0 0 10px 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  animation: titlePulse 2s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    transform: scale(1.05);
+    filter: hue-rotate(10deg);
+  }
+}
+
+.name-title {
+  font-size: 5rem;
+  color: #ffd700;
+  margin: 0 0 20px 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  animation: nameGlow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes nameGlow {
+  0% {
+    text-shadow: 
+      2px 2px 0 #000,
+      0 0 10px #ffd700,
+      0 0 20px #ffd700;
+  }
+  100% {
+    text-shadow: 
+      2px 2px 0 #000,
+      0 0 20px #ffd700,
+      0 0 40px #ffd700,
+      0 0 60px #ff8c00;
+  }
+}
+
+.age-subtitle {
+  font-size: 1.5rem;
+  color: #00d9ff;
+  margin: 10px 0;
+}
+
+.instruction {
+  font-size: 1rem;
+  color: #a8dadc;
+  margin: 15px 0 0 0;
+  font-style: italic;
+}
+
+/* =================================
+   NAVIGATION SECTION
+   ================================= */
+
+.navigation-section {
+  margin-top: 40px;
+}
+
+.pixel-button {
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  background: #e94560;
+  border: 4px solid #000;
+  padding: 15px 30px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+  
+  /* Pixelated rendering */
+  image-rendering: pixelated;
+  
+  box-shadow: 
+    4px 4px 0 #000,
+    8px 8px 0 rgba(0, 0, 0, 0.3);
+  
+  transition: all 0.1s;
+}
+
+.pixel-button:hover {
+  background: #ff6b81;
+  transform: translate(2px, 2px);
+  box-shadow: 
+    2px 2px 0 #000,
+    4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.pixel-button:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 #000;
+}
+
+.next-button {
+  animation: buttonPulse 2s ease-in-out infinite;
+}
+
+@keyframes buttonPulse {
+  0%, 100% {
+    box-shadow: 
+      4px 4px 0 #000,
+      8px 8px 0 rgba(0, 0, 0, 0.3),
+      0 0 0 rgba(233, 69, 96, 0.5);
+  }
+  50% {
+    box-shadow: 
+      4px 4px 0 #000,
+      8px 8px 0 rgba(0, 0, 0, 0.3),
+      0 0 30px rgba(233, 69, 96, 0.8);
+  }
+}
+
+/* =================================
+   STATS DISPLAY
+   ================================= */
+
+.stats-display {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: 
+    linear-gradient(135deg, rgba(0, 217, 255, 0.2) 0%, rgba(233, 69, 96, 0.2) 100%),
+    rgba(0, 0, 0, 0.9);
+  border: 4px solid #00d9ff;
+  padding: 20px 25px;
+  z-index: 200;
+  
+  /* Pixelated rendering */
+  image-rendering: pixelated;
+  
+  box-shadow: 
+    0 0 0 2px #000,
+    0 0 25px rgba(0, 217, 255, 0.8),
+    0 0 50px rgba(0, 217, 255, 0.4),
+    inset 0 0 20px rgba(0, 217, 255, 0.2);
+  
+  animation: statsPulse 2s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes statsPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 0 0 2px #000,
+      0 0 25px rgba(0, 217, 255, 0.8),
+      0 0 50px rgba(0, 217, 255, 0.4),
+      inset 0 0 20px rgba(0, 217, 255, 0.2);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 
+      0 0 0 2px #000,
+      0 0 35px rgba(0, 217, 255, 1),
+      0 0 70px rgba(255, 215, 0, 0.5),
+      inset 0 0 30px rgba(0, 217, 255, 0.3);
+  }
+}
+
+.stat-item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.stat-label {
+  color: #a8dadc;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stat-value {
+  color: #ffd700;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 0 #000;
+  min-width: 30px;
+  text-align: center;
+}
+
+/* =================================
+   DECORATIVE CONFETTI
+   ================================= */
+
+.decorations {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Floating sparkles */
+.decorations::before,
+.decorations::after {
+  content: '✨';
+  position: absolute;
+  font-size: 2rem;
+  animation: sparkleFloat 4s ease-in-out infinite;
+  opacity: 0.6;
+}
+
+.decorations::before {
+  top: 20%;
+  left: 15%;
+  animation-delay: 0s;
+}
+
+.decorations::after {
+  top: 60%;
+  right: 15%;
+  animation-delay: 2s;
+}
+
+@keyframes sparkleFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translateY(-20px) rotate(90deg) scale(1.2);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(0) rotate(180deg) scale(0.8);
+    opacity: 0.6;
+  }
+  75% {
+    transform: translateY(-20px) rotate(270deg) scale(1.2);
+    opacity: 1;
+  }
+}
+
+.confetti {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  
+  /* Pixelated rendering */
+  image-rendering: pixelated;
+  
+  animation: confettiFall 8s linear infinite;
+}
+
+.confetti-1 {
+  left: 10%;
+  background: #ff4444;
+  animation-delay: 0s;
+}
+
+.confetti-2 {
+  left: 30%;
+  background: #44ff44;
+  animation-delay: 2s;
+}
+
+.confetti-3 {
+  left: 50%;
+  background: #4444ff;
+  animation-delay: 4s;
+}
+
+.confetti-4 {
+  left: 70%;
+  background: #ffff44;
+  animation-delay: 1s;
+}
+
+.confetti-5 {
+  left: 90%;
+  background: #ff44ff;
+  animation-delay: 3s;
+}
+
+@keyframes confettiFall {
+  0% {
+    top: -10%;
+    transform: rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    top: 110%;
+    transform: rotate(360deg);
+    opacity: 0.5;
+  }
+}
+
+/* =================================
+   RESPONSIVE DESIGN
+   ================================= */
+
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 2.5rem;
+  }
+  
+  .name-title {
+    font-size: 3rem;
+  }
+  
+  .age-subtitle {
+    font-size: 1.2rem;
+  }
+  
+  .instruction {
+    font-size: 0.9rem;
+  }
+  
+  .pixel-button {
+    font-size: 1rem;
+    padding: 12px 20px;
+  }
+  
+  .birthday-message {
+    padding: 20px;
+    border-width: 3px;
+  }
+  
+  .stats-display {
+    top: 10px;
+    right: 10px;
+    padding: 10px 15px;
+  }
+  
+  .stat-label {
+    font-size: 0.8rem;
+  }
+  
+  .stat-value {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-title {
+    font-size: 2rem;
+  }
+  
+  .name-title {
+    font-size: 2.5rem;
+  }
+  
+  .age-subtitle {
+    font-size: 1rem;
+  }
+  
+  .birthday-message {
+    padding: 15px;
+  }
+}
+
+/* =================================
+   ACCESSIBILITY
+   ================================= */
+
+.pixel-button:focus {
+  outline: 3px dashed #ffd700;
+  outline-offset: 5px;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

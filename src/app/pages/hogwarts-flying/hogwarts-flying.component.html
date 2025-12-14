@@ -1,0 +1,340 @@
+<!-- HOGWARTS FLYING GAME TEMPLATE -->
+<div class="hogwarts-container">
+  
+  <!-- Magical Background -->
+  <div class="hogwarts-sky"></div>
+  <div class="stars-layer"></div>
+  <div class="clouds-layer"></div>
+  <div class="castle-silhouette"></div>
+  
+  <!-- Ambient magical particles during game -->
+  <div class="ambient-magic" *ngIf="gameState.isPlaying">
+    <div class="magic-wisp"></div>
+    <div class="magic-wisp"></div>
+    <div class="magic-wisp"></div>
+    <div class="magic-wisp"></div>
+    <div class="magic-wisp"></div>
+  </div>
+
+  <!-- House Selector (Top Right) -->
+  <div class="house-selector-btn" (click)="toggleHouseSelector()">
+    <div class="house-crest" [style.background-color]="currentHouse.color"></div>
+    <span>{{ currentHouse.displayName }}</span>
+  </div>
+
+  <!-- House Selection Dropdown -->
+  <div class="house-dropdown" *ngIf="showHouseSelector">
+    <div 
+      *ngFor="let house of houseConfigs | keyvalue"
+      class="house-option"
+      [class.selected]="player.house === house.value.name"
+      (click)="changeHouse(house.value.name)">
+      <div class="house-crest-small" [style.background-color]="house.value.color"></div>
+      <span>{{ house.value.displayName }}</span>
+    </div>
+  </div>
+
+  <!-- Lives Display (Top Left) -->
+  <div class="lives-container" *ngIf="gameState.isPlaying">
+    <div class="lives-label">Lives</div>
+    <div class="lives-display">
+      <div 
+        *ngFor="let life of [].constructor(player.maxLives); let i = index"
+        class="life-heart"
+        [class.lost]="i >= player.lives">
+        ❤️
+      </div>
+    </div>
+  </div>
+
+  <!-- Collected Rewards Tracker (Top Left Below Lives) -->
+  <div class="rewards-tracker" *ngIf="gameState.isPlaying">
+    <div class="tracker-label">🎁 Gifts Collected</div>
+    <div class="tracker-count">{{ gameState.collectedBoxes.length }}</div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-container" *ngIf="gameState.isPlaying">
+    <div class="progress-label">Distance to Hogwarts</div>
+    <div class="progress-bar-outer">
+      <div 
+        class="progress-bar-inner" 
+        [style.width.%]="progressPercentage"
+        [style.background-color]="currentHouse.capeColor">
+      </div>
+    </div>
+    <div class="progress-text">{{ progressPercentage.toFixed(0) }}%</div>
+  </div>
+
+  <!-- Start Screen -->
+  <div class="start-screen" *ngIf="!gameState.isPlaying && !gameState.isGameOver && !gameState.isFinished">
+    <!-- Magical particles background -->
+    <div class="magic-particles">
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+    </div>
+    
+    <!-- Flowing spell animations -->
+    <div class="floating-spells">
+      <div class="spell-orb stupefy"></div>
+      <div class="spell-orb incendio"></div>
+      <div class="spell-orb glacius"></div>
+      <div class="spell-orb confringo"></div>
+    </div>
+    
+    <!-- Magical runic circle -->
+    <div class="runic-circle"></div>
+    
+    <div class="content-wrapper">
+      <div class="title-container">
+        <div class="title-glow"></div>
+        <h1 class="game-title">
+          <span class="title-word">The</span>
+          <span class="title-word highlight">Triwizard</span>
+          <span class="title-word">Broomstick</span>
+          <span class="title-word highlight">Trial</span>
+        </h1>
+        <div class="subtitle-divider"></div>
+        <p class="game-subtitle">
+          <span class="subtitle-icon">✦</span>
+          Guide through the enchanted skies to Hogwarts
+          <span class="subtitle-icon">✦</span>
+        </p>
+      </div>
+      
+      <div class="instructions-scroll">
+        <div class="scroll-ornament top"></div>
+        <div class="instructions-content">
+          <h3 class="instructions-title">
+            <span class="title-flourish">━━</span>
+            Quest Instructions
+            <span class="title-flourish">━━</span>
+          </h3>
+          <div class="instruction-grid">
+            <div class="instruction-item">
+              <div class="instruction-icon">🧹</div>
+              <div class="instruction-text">
+                <strong>Control:</strong> Move your mouse to guide your broomstick
+              </div>
+            </div>
+            <div class="instruction-item">
+              <div class="instruction-icon">❤️</div>
+              <div class="instruction-text">
+                <strong>Lives:</strong> You have 5 lives to complete the journey
+              </div>
+            </div>
+            <div class="instruction-item">
+              <div class="instruction-icon">⚡</div>
+              <div class="instruction-text">
+                <strong>Dodge:</strong> Avoid incoming spells (Stupefy, Incendio, Glacius, Confringo)
+              </div>
+            </div>
+            <div class="instruction-item">
+              <div class="instruction-icon">🎁</div>
+              <div class="instruction-text">
+                <strong>Collect:</strong> Gather mystery boxes for special rewards
+              </div>
+            </div>
+            <div class="instruction-item">
+              <div class="instruction-icon">🏰</div>
+              <div class="instruction-text">
+                <strong>Victory:</strong> Reach Hogwarts Castle to complete the trial
+              </div>
+            </div>
+            <div class="instruction-item">
+              <div class="instruction-icon">🦁</div>
+              <div class="instruction-text">
+                <strong>House:</strong> Select your house allegiance in the top right
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-ornament bottom"></div>
+      </div>
+      
+      <button class="start-btn" (click)="startGame()">
+        <div class="btn-glow"></div>
+        <div class="btn-shimmer"></div>
+        <span class="btn-text">Begin Your Flight</span>
+        <div class="btn-wings left">◄</div>
+        <div class="btn-wings right">►</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Game Over Screen -->
+  <div class="game-over-screen" *ngIf="gameState.isGameOver">
+    <div class="effect-message">{{ currentEffect }}</div>
+    <h2 class="game-over-title">You've Been Hit!</h2>
+    <p class="game-over-text">The spell was too powerful...</p>
+    <button class="restart-btn" (click)="restartGame()">
+      <span>Try Again</span>
+    </button>
+  </div>
+
+  <!-- Win Screen -->
+  <div class="win-screen" *ngIf="gameState.isFinished && !gameState.showScratchCards">
+    <div class="win-container">
+      <h1 class="win-title">Congratulations! </h1>
+      <p class="win-text">You've reached the finish line!</p>
+      <p class="boxes-collected">Mystery Boxes Collected: {{ gameState.collectedBoxes.length }}</p>
+      <button class="reveal-btn" (click)="showRewards()" *ngIf="gameState.collectedBoxes.length > 0">
+        <span>Reveal Your Rewards</span>
+      </button>
+      <button class="next-btn" (click)="nextPage()" *ngIf="gameState.collectedBoxes.length === 0">
+        <span>Continue</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Scratch Cards Screen -->
+  <div class="scratch-cards-screen" *ngIf="gameState.showScratchCards">
+    <!-- Magical celebration effects -->
+    <div class="celebration-magic">
+      <div class="magic-spark"></div>
+      <div class="magic-spark"></div>
+      <div class="magic-spark"></div>
+      <div class="magic-spark"></div>
+      <div class="magic-spark"></div>
+      <div class="magic-spark"></div>
+      <div class="magic-swirl"></div>
+      <div class="magic-swirl"></div>
+    </div>
+    
+    <h1 class="scratch-title">Scratch & Win!</h1>
+    <p class="scratch-subtitle">Scratch each card to reveal your reward</p>
+    
+    <div class="cards-grid">
+      <div 
+        *ngFor="let reward of rewards"
+        class="scratch-card"
+        [class.revealed]="reward.revealed"
+        [class.scratching]="reward.id === scratchingRewardId"
+        (mousedown)="startScratching($event, reward)"
+        (mousemove)="scratch($event, reward)"
+        (mouseup)="stopScratching()"
+        (mouseleave)="stopScratching()">
+        <canvas 
+          *ngIf="!reward.revealed"
+          class="scratch-canvas"
+          [id]="'canvas-' + reward.id"
+          width="200"
+          height="250">
+        </canvas>
+        <div class="card-back">
+          <div class="reward-icon-text">{{ getRewardIconText(reward.type) }}</div>
+          <h3 class="reward-name">{{ reward.name }}</h3>
+          <p class="reward-desc">{{ reward.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Revealed Rewards Summary -->
+    <div class="rewards-summary" *ngIf="allRewardsRevealed">
+      <h2>All Rewards Revealed!</h2>
+      <button class="export-btn" (click)="exportRewardCard()">
+        <span>📥 Export Reward Card</span>
+      </button>
+      <button class="next-btn" (click)="goToQuestionnaire()">
+        <span>Continue Adventure</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Hidden Canvas for Export -->
+  <canvas #exportCanvas style="display: none;" width="800" height="600"></canvas>
+
+  <!-- Player on Broomstick -->
+  <div 
+    class="player-container"
+    *ngIf="gameState.isPlaying"
+    [style.left.px]="player.x"
+    [style.top.px]="player.y"
+    [style.transform]="'translate(-50%, -50%) rotate(' + player.rotation + 'deg)'"
+    [class.stunned]="player.isStunned"
+    [class.burning]="player.isBurning"
+    [class.frozen]="player.isFrozen"
+    [class.exploding]="player.isExploding">
+    
+    <!-- Broomstick (bristles behind, handle in front) -->
+    <div class="broomstick">
+      <div class="broom-bristles"></div>
+      <div class="broom-handle"></div>
+    </div>
+
+    <!-- Joy Character (Hoodie Guy) -->
+    <div class="joy-character">
+      <!-- Head with Face -->
+      <div class="joy-head">
+        <div class="joy-eyes">
+          <div class="eye left-eye"></div>
+          <div class="eye right-eye"></div>
+        </div>
+        <div class="joy-mouth"></div>
+      </div>
+      
+      <!-- Hoodie with House Cape -->
+      <div class="joy-hoodie">
+        <div class="hoodie-main"></div>
+        <div class="house-cape" [style.background-color]="currentHouse.capeColor"></div>
+        <div class="hoodie-strings"></div>
+      </div>socks
+      
+      <!-- Arms on Broomstick -->
+      <div class="joy-arms">
+        <div class="arm left-arm"></div>
+        <div class="arm right-arm"></div>
+      </div>
+      
+      <!-- Legs -->
+      <div class="joy-legs">
+        <div class="leg left-leg"></div>
+        <div class="leg right-leg"></div>
+      </div>
+    </div>
+
+    <!-- Effect Particles -->
+    <div class="fire-particles" *ngIf="player.isBurning"></div>
+    <div class="ice-particles" *ngIf="player.isFrozen"></div>
+    <div class="stun-stars" *ngIf="player.isStunned">⭐⭐⭐</div>
+    <div class="explosion-effect" *ngIf="player.isExploding"></div>
+  </div>
+
+  <!-- Spells -->
+  <div 
+    *ngFor="let spell of spells"
+    class="spell"
+    [style.left.px]="spell.x"
+    [style.top.px]="spell.y"
+    [attr.data-type]="spell.type">
+    <div class="spell-projectile" [style.background-color]="spell.color">
+      <div class="spell-trail"></div>
+    </div>
+  </div>
+
+  <!-- Mystery Boxes -->
+  <div 
+    *ngFor="let box of mysteryBoxes"
+    class="mystery-box"
+    [class.collected]="box.collected"
+    [style.left.px]="box.x"
+    [style.top.px]="box.y">
+    <div class="box-glow"></div>
+    <div class="box-body">
+      <div class="box-ribbon"></div>
+      <div class="box-question">?</div>
+    </div>
+  </div>
+
+  <!-- Current Effect Display -->
+  <div class="current-effect" *ngIf="currentEffect && gameState.isPlaying">
+    {{ currentEffect }}
+  </div>
+
+</div>

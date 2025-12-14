@@ -1,0 +1,103 @@
+<!-- 
+  LETTER SCROLL TEMPLATE
+  
+  LLD: Minecraft-style parchment scroll with letter
+  
+  Structure:
+  1. Pixelated background (game-style)
+  2. Scroll/parchment container
+  3. Letter content (from config)
+  4. Pixelated character at bottom
+  5. Interactive heart button
+-->
+
+<div class="letter-page">
+  
+  <!-- Pixelated game-style background -->
+  <div class="minecraft-background">
+    <div class="pixel-pattern"></div>
+  </div>
+  
+  <!-- Old scroll/parchment -->
+  <div class="scroll-container">
+    
+    <!-- Scroll top edge (torn paper effect) -->
+    <div class="scroll-top"></div>
+    
+    <!-- Scroll content area -->
+    <div class="scroll-content">
+      
+      <!-- Letter greeting -->
+      <div class="letter-greeting pixel-text">
+        {{ letterContent.greeting }}
+      </div>
+      
+      <!-- Letter paragraphs -->
+      <div class="letter-body">
+        <p *ngFor="let paragraph of letterContent.paragraphs" class="letter-paragraph pixel-text">
+          {{ paragraph }}
+        </p>
+      </div>
+      
+      <!-- Letter signature -->
+      <div class="letter-signature pixel-text">
+        {{ letterContent.signature }}
+      </div>
+      
+    </div>
+    
+    <!-- Scroll bottom edge -->
+    <div class="scroll-bottom"></div>
+    
+  </div>
+  
+  <!-- Pixelated character on the left side -->
+  <div class="character-sidebar">
+    
+    <!-- Character sprite -->
+    <div class="pixel-character" [class.animating]="characterAnimating">
+      
+      <!-- Head with beard -->
+      <div class="character-head">
+        <div class="character-hair"></div>
+        <div class="character-face"></div>
+        <div class="character-beard"></div>
+        <div class="character-mustache"></div>
+      </div>
+      
+      <!-- Oversized hoodie body -->
+      <div class="character-body">
+        <div class="hoodie"></div>
+        <div class="hoodie-pocket"></div>
+      </div>
+      
+      <!-- Arms -->
+      <div class="character-arms">
+        <div class="arm-left"></div>
+        <div class="arm-right"></div>
+      </div>
+      
+    </div>
+    
+    <!-- Interactive heart button -->
+    <div class="heart-button" (click)="onHeartClick()">
+      <div class="pixel-heart">
+        <div class="heart-row heart-row-1"></div>
+        <div class="heart-row heart-row-2"></div>
+        <div class="heart-row heart-row-3"></div>
+        <div class="heart-row heart-row-4"></div>
+        <div class="heart-row heart-row-5"></div>
+      </div>
+      <div class="heart-label pixel-text">Click Me!</div>
+    </div>
+    
+  </div>
+  
+  <!-- Decorative elements -->
+  <div class="decorations">
+    <div class="floating-heart floating-heart-1">♥</div>
+    <div class="floating-heart floating-heart-2">♥</div>
+    <div class="floating-heart floating-heart-3">♥</div>
+  </div>
+  
+</div>

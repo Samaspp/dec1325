@@ -1,0 +1,61 @@
+/**
+ * GLOBAL STYLES
+ * 
+ * LLD: Application-wide CSS styles
+ * 
+ * Purpose:
+ * - Reset browser defaults
+ * - Set pixelated rendering globally
+ * - Configure base typography
+ * - Remove scrollbars for immersive experience
+ */
+
+@import "tailwindcss";
+
+/* Global reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Courier New', 'Courier', monospace;
+  
+  /* Enable pixelated rendering globally */
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Scrollbar styling (hide for cleaner look) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Remove default focus outline, add custom */
+*:focus {
+  outline: none;
+}
+
+/* Smooth transitions for interactive elements */
+button, a {
+  transition: all 0.2s ease;
+}
+
+/* Disable text selection for UI elements (optional) */
+.no-select {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

@@ -1,0 +1,122 @@
+<!-- CSGO WEAPONS PAGE TEMPLATE -->
+<div class="csgo-container">
+  
+  <!-- Background -->
+  <div class="csgo-background"></div>
+  
+  <!-- CS:GO HUD Overlays -->
+  <div class="csgo-hud-overlay">
+    <div class="hud-corner top-left"></div>
+    <div class="hud-corner top-right"></div>
+    <div class="hud-corner bottom-left"></div>
+    <div class="hud-corner bottom-right"></div>
+  </div>
+  
+  <!-- CS:GO Tactical Scanner Lines -->
+  <div class="tactical-scanner">
+    <div class="scan-line horizontal"></div>
+    <div class="scan-line vertical"></div>
+  </div>
+
+  <!-- Target Character Section -->
+  <div class="target-section">
+    
+    <!-- Health Bar -->
+    <div class="health-bar-container" *ngIf="target.isAlive">
+      <div class="health-bar-label">HP</div>
+      <div class="health-bar-outer">
+        <div 
+          class="health-bar-inner" 
+          [style.width.%]="healthPercentage"
+          [style.background-color]="healthBarColor">
+        </div>
+      </div>
+      <div class="health-bar-text">{{ target.health }}/{{ target.maxHealth }}</div>
+    </div>
+
+    <!-- Target Character -->
+    <div 
+      class="target-character"
+      [class.ghost]="target.isGhost"
+      [class.shake]="showBloodEffect"
+      (click)="attackTarget($event)">
+      
+      <!-- Head hit zone -->
+      <div class="character-head"></div>
+      
+      <!-- Body hit zone -->
+      <div class="character-body"></div>
+      
+      <!-- Legs hit zone -->
+      <div class="character-legs"></div>
+
+      <!-- Blood effect -->
+      <div class="blood-effect" *ngIf="showBloodEffect"></div>
+
+      <!-- Explosion effect -->
+      <div class="explosion-effect" *ngIf="isExploding"></div>
+
+      <!-- Ghost applause hands -->
+      <div class="applause-hands" *ngIf="showApplause">
+        <div class="hand-left">👏</div>
+        <div class="hand-right">👏</div>
+      </div>
+    </div>
+
+    <!-- Rising Soul (appears after death) -->
+    <div class="soul-rising" *ngIf="showSoul" (click)="onSoulClick()">
+      <div class="soul-body">
+        <div class="soul-face"></div>
+      </div>
+      <div class="soul-tail"></div>
+    </div>
+
+    <!-- Dialogue Box -->
+    <div class="dialogue-box">
+      <div class="dialogue-arrow"></div>
+      <p class="dialogue-text">{{ target.dialogue }}</p>
+    </div>
+  </div>
+
+  <!-- Weapon Effects -->
+  <div class="muzzle-flash" *ngIf="showMuzzleFlash"></div>
+  <div class="slash-effect" *ngIf="isSlashing"></div>
+
+  <!-- Weapon Inventory Panel -->
+  <div class="weapon-panel">
+    
+    <!-- Selected Weapon Display -->
+    <div class="selected-weapon-display" *ngIf="selectedWeapon">
+      <div class="weapon-name">{{ selectedWeapon.name }}</div>
+      <div class="weapon-stats">
+        <span class="stat">DMG: {{ selectedWeapon.damage }}</span>
+        <span class="stat">HS: {{ selectedWeapon.headshotMultiplier }}x</span>
+      </div>
+    </div>
+
+    <!-- Inventory Controls -->
+    <button class="scroll-btn scroll-left" (click)="scrollInventoryLeft()">◄</button>
+    
+    <!-- Weapon Inventory -->
+    <div class="weapon-inventory-scroll">
+      <div 
+        *ngFor="let weapon of weapons"
+        class="weapon-card"
+        [class.selected]="selectedWeapon?.id === weapon.id"
+        (click)="selectWeapon(weapon)">
+        
+        <!-- Weapon Icon -->
+        <div class="weapon-icon" [ngClass]="weapon.icon"></div>
+        
+        <!-- Weapon Name -->
+        <div class="weapon-card-name">{{ weapon.name }}</div>
+        
+        <!-- Category Badge -->
+        <div class="weapon-category">{{ weapon.category }}</div>
+      </div>
+    </div>
+
+    <button class="scroll-btn scroll-right" (click)="scrollInventoryRight()">►</button>
+  </div>
+
+</div>

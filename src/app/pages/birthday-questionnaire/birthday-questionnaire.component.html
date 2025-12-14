@@ -1,0 +1,269 @@
+<!-- BIRTHDAY QUESTIONNAIRE TEMPLATE -->
+<div class="questionnaire-container">
+  
+  <!-- Chinese Donghua Background -->
+  <div class="donghua-bg">
+    <div class="mountain-layer layer1"></div>
+    <div class="mountain-layer layer2"></div>
+    <div class="mountain-layer layer3"></div>
+    <div class="clouds-float"></div>
+    <div class="lanterns">
+      <div class="lantern" style="left: 10%; animation-delay: 0s;"></div>
+      <div class="lantern" style="left: 30%; animation-delay: 1s;"></div>
+      <div class="lantern" style="left: 50%; animation-delay: 0.5s;"></div>
+      <div class="lantern" style="left: 70%; animation-delay: 1.5s;"></div>
+      <div class="lantern" style="left: 90%; animation-delay: 0.8s;"></div>
+    </div>
+  </div>
+
+  <!-- Form Screen -->
+  <div class="scroll-container" *ngIf="!isSubmitted">
+    <div class="ancient-scroll">
+      <div class="scroll-top"></div>
+      <div class="scroll-content">
+        <h1 class="scroll-title">Birthday Chronicles</h1>
+        <p class="scroll-subtitle">A Journey Through Your Special Day</p>
+
+        <form class="questionnaire-form" (ngSubmit)="submitQuestionnaire()">
+          
+          <!-- Basic Info -->
+          <div class="form-section">
+            <h3 class="section-title">Basic Information</h3>
+            
+            <div class="form-field">
+              <label>Name</label>
+              <input 
+                type="text" 
+                [(ngModel)]="formData.name"
+                name="name"
+                (input)="saveToLocalStorage()"
+                placeholder="Enter your name"
+                required>
+            </div>
+
+            <div class="form-field">
+              <label>Age </label>
+              <input 
+                type="text" 
+                [(ngModel)]="formData.age"
+                name="age"
+                (input)="saveToLocalStorage()"
+                placeholder="Enter your age"
+                required>
+            </div>
+
+            <div class="form-field">
+              <label>Current Location </label>
+              <input 
+                type="text" 
+                [(ngModel)]="formData.currentLocation"
+                name="currentLocation"
+                (input)="saveToLocalStorage()"
+                placeholder="Where are you right now?"
+                required>
+            </div>
+
+            <div class="form-field">
+              <label>Current Attire</label>
+              <input 
+                type="text" 
+                [(ngModel)]="formData.currentAttire"
+                name="currentAttire"
+                (input)="saveToLocalStorage()"
+                placeholder="What are you wearing?"
+                required>
+            </div>
+          </div>
+
+          <!-- Birthday Description -->
+          <div class="form-section">
+            <h3 class="section-title">Birthday Description</h3>
+            
+            <div class="form-field">
+              <label>Describe your birthday experience (max 2000 characters)</label>
+              <textarea 
+                [(ngModel)]="formData.birthdayDescription"
+                name="birthdayDescription"
+                (input)="saveToLocalStorage()"
+                maxlength="2000"
+                placeholder="Tell us about your birthday celebration, how you felt, what made it special..."
+                rows="6"
+                required></textarea>
+              <small class="char-count">{{ formData.birthdayDescription.length }} / 2000</small>
+            </div>
+          </div>
+
+          <!-- Favorites -->
+          <div class="form-section">
+            <h3 class="section-title"> Favorites</h3>
+            
+            <div class="form-field">
+              <label>Favourite Song</label>
+              <input 
+                type="text" 
+                [(ngModel)]="formData.favouriteSong"
+                name="favouriteSong"
+                (input)="saveToLocalStorage()"
+                placeholder="Song that moves your soul"
+                required>
+            </div>
+
+            <div class="form-field">
+              <label>Favourite Colour</label>
+              <input 
+                type="text" 
+                [(ngModel)]="formData.favouriteColour"
+                name="favouriteColour"
+                (input)="saveToLocalStorage()"
+                placeholder="Your favorite color"
+                required>
+            </div>
+
+            <div class="form-field">
+              <label>Favourite Movie</label>
+              <input 
+                type="text" 
+                [(ngModel)]="formData.favouriteMovie"
+                name="favouriteMovie"
+                (input)="saveToLocalStorage()"
+                placeholder="Movie that stays with you"
+                required>
+            </div>
+
+            <div class="form-field">
+              <label>Favourite Thing About Yourself</label>
+              <input 
+                type="text" 
+                [(ngModel)]="formData.favouriteThingAboutYourself"
+                name="favouriteThingAboutYourself"
+                (input)="saveToLocalStorage()"
+                placeholder="What do you love about yourself?"
+                required>
+            </div>
+          </div>
+
+          <!-- Reflections -->
+          <div class="form-section">
+            <h3 class="section-title"> Reflections & Aspirations</h3>
+            
+            <div class="form-field">
+              <label>Plans for This Year</label>
+              <textarea 
+                [(ngModel)]="formData.plansForThisYear"
+                name="plansForThisYear"
+                (input)="saveToLocalStorage()"
+                placeholder="What do you want to achieve this year?"
+                rows="3"
+                required></textarea>
+            </div>
+
+            <div class="form-field">
+              <label>People You've Been With Last Year</label>
+              <input 
+                type="text" 
+                [(ngModel)]="formData.peopleLastYear"
+                name="peopleLastYear"
+                (input)="saveToLocalStorage()"
+                placeholder="Names of people who made your year special"
+                required>
+            </div>
+
+            <div class="form-field">
+              <label>Random Memory of the Past Year</label>
+              <textarea 
+                [(ngModel)]="formData.randomMemory"
+                name="randomMemory"
+                (input)="saveToLocalStorage()"
+                placeholder="A moment from the past year you want to remember..."
+                rows="4"
+                required></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button 
+              type="submit" 
+              class="submit-btn"
+              [disabled]="!isFormComplete">
+              <span>Submit</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+      <div class="scroll-bottom"></div>
+    </div>
+  </div>
+
+  <!-- Submitted Screen -->
+  <div class="submitted-screen" *ngIf="isSubmitted && !showConfetti">
+    <div class="success-card">
+      <h2 class="success-title">Questionnaire Submitted Successfully</h2>
+      
+      <div class="action-buttons">
+        <button class="action-btn gmail-btn" (click)="sendViaGmail()">
+          <span>Send via Gmail</span>
+        </button>
+        <button class="action-btn download-btn" (click)="downloadQuestionnaire()">
+          <span> Download as Text</span>
+        </button>
+        <button class="action-btn celebrate-btn" (click)="showFinalCelebration()">
+          <span> Continue Celebration</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final Celebration - Chinese Donghua Style -->
+  <div class="confetti-screen" *ngIf="showConfetti">
+    <!-- Floating Cherry Blossoms -->
+    <div class="cherry-blossom-layer">
+      <div *ngFor="let i of confettiArray1" class="cherry-blossom" [style.left.%]="getRandomPosition()" [style.animation-delay.s]="getRandomDelay()">🌸</div>
+    </div>
+    
+    <!-- Floating Lanterns -->
+    <div class="lantern-float lantern-1">🏮</div>
+    <div class="lantern-float lantern-2">🏮</div>
+    <div class="lantern-float lantern-3">🏮</div>
+    <div class="lantern-float lantern-4">🏮</div>
+    
+    <!-- Golden Light Particles -->
+    <div class="light-particle particle-1"></div>
+    <div class="light-particle particle-2"></div>
+    <div class="light-particle particle-3"></div>
+    <div class="light-particle particle-4"></div>
+    <div class="light-particle particle-5"></div>
+    
+    <!-- Mystical Clouds -->
+    <div class="mystical-cloud cloud-1"></div>
+    <div class="mystical-cloud cloud-2"></div>
+    
+    <!-- Celebration Content -->
+    <div class="celebration-content-donghua">
+      <div class="decorative-frame-top"></div>
+      
+      <h1 class="celebration-title-donghua">
+        <span class="chinese-ornament left">❀</span>
+        <span class="title-main">生日快乐</span>
+        <span class="chinese-ornament right">❀</span>
+      </h1>
+      
+      <h2 class="celebration-subtitle">HAPPY BIRTHDAY JOY</h2>
+      
+      <div class="blessing-text">
+        <p class="blessing-line">愿你此生</p>
+        <p class="blessing-line">繁花似锦</p>
+        <p class="blessing-line-english">May your life bloom like a garden of flowers</p>
+      </div>
+      
+      <div class="decorative-frame-bottom"></div>
+      
+      <button class="home-btn-donghua" (click)="goHome()">
+        <span class="btn-ornament">◈</span>
+        <span class="btn-text-donghua">Return Home</span>
+        <span class="btn-ornament">◈</span>
+      </button>
+    </div>
+  </div>
+
+</div>

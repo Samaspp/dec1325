@@ -1,0 +1,96 @@
+<!-- 
+  BIRTHDAY HOME PAGE TEMPLATE
+  
+  Epic celebration page with pixel-art anime characters on green meadow
+  - Beautiful gradient sky with clouds and sun
+  - Balloons floating in top/middle area  
+  - Green meadow with 22 pixel-art anime characters doing personality actions
+-->
+
+<div class="birthday-container">
+  
+  <!-- Sky layer with gradient, sun and clouds -->
+  <div class="sky-layer">
+    <div class="sky-gradient"></div>
+    <div class="cloud-layer">
+      <div class="cloud cloud-1"></div>
+      <div class="cloud cloud-2"></div>
+      <div class="cloud cloud-3"></div>
+      <div class="cloud cloud-4"></div>
+      <div class="cloud cloud-5"></div>
+    </div>
+  </div>
+  
+  <!-- Balloons rendering layer (top 70% of screen) -->
+  <div class="balloons-layer">
+    @for (balloon of balloons; track balloon.id) {
+      <app-balloon
+        [balloon]="balloon"
+        (balloonClicked)="onBalloonClick($event)">
+      </app-balloon>
+    }
+  </div>
+  
+  <!-- Central content overlay -->
+  <div class="content-overlay">
+    
+    <!-- Birthday message -->
+    <div class="birthday-message">
+      <h1 class="epic-title">HAPPY BIRTHDAY
+      </h1>
+      <h2 class="epic-name">JOY</h2>
+
+      <p class="epic-instruction">Click balloons to pop them!</p>
+    </div>
+    
+    <!-- Navigation button -->
+    <div class="navigation-section">
+      <button 
+        class="epic-button"
+        (click)="navigateToNext()">
+        <span class="button-glow">CONTINUE CELEBRATION</span>
+        <span class="button-arrow">▶</span>
+      </button>
+    </div>
+    
+    <!-- Stats display -->
+    <div class="stats-display">
+      <div class="stat-card">
+        <span class="stat-icon"></span>
+        <span class="stat-label">BALLOONS</span>
+        <span class="stat-value">{{ remainingBalloonCount }}</span>
+      </div>
+    </div>
+    
+  </div>
+  
+  <!-- GREEN MEADOW WITH PIXEL ART ANIME CHARACTERS -->
+  <div class="meadow-layer">
+    <!-- Grass textures -->
+    <div class="grass-texture"></div>
+    <div class="grass-highlights"></div>
+    <div class="meadow-flowers"></div>
+    
+    <!-- Title banner above meadow -->
+    <div class="meadow-title">
+      <span>★ ANIME LEGENDS CELEBRATION ★</span>
+    </div>
+    
+    <!-- Canvas for pixel art characters -->
+    <canvas #charactersCanvas class="character-canvas"></canvas>
+    
+    <!-- Character tooltips (appear on hover) -->
+    @if (hoveredCharacter !== null) {
+      <div class="character-tooltip" 
+           [style.left.px]="tooltipX"
+           [style.top.px]="tooltipY">
+        <div class="tooltip-content">
+          <h3 class="tooltip-name">{{ getCharacterName(hoveredCharacter) }}</h3>
+          <p class="tooltip-anime">{{ getCharacterAnime(hoveredCharacter) }}</p>
+          <p class="tooltip-quote">"{{ getCharacterQuote(hoveredCharacter) }}"</p>
+        </div>
+      </div>
+    }
+  </div>
+  
+</div>

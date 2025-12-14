@@ -1,0 +1,36 @@
+/**
+ * ROOT APP STYLES
+ * 
+ * LLD: Global application styles
+ * 
+ * Purpose:
+ * - Reset default browser styles
+ * - Set global box-sizing
+ * - Remove default margins/padding
+ * - Enable full viewport height for pages
+ */
+
+/* Global reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Full viewport for router outlet */
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Remove default styling */
+body {
+  font-family: 'Courier New', monospace;
+  background: #000;
+}
+
+/* Router outlet takes full viewport */
+router-outlet {
+  display: none;
+}

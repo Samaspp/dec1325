@@ -1,0 +1,42 @@
+<!-- 
+  BALLOON COMPONENT TEMPLATE
+  
+  LLD: HTML structure for pixelated balloon rendering
+  
+  Structure:
+  - Container div with dynamic positioning (ngStyle)
+  - Click handler for pop interaction
+  - Conditional rendering based on balloon state
+  - CSS classes for pixelated art and animations
+-->
+
+<div 
+  *ngIf="balloon.state !== BalloonState.POPPED"
+  class="balloon-container"
+  [ngStyle]="getBalloonStyles()"
+  [ngClass]="getBalloonClasses()"
+  (click)="onBalloonClick($event)">
+  
+  <!-- Main balloon body (pixelated circle) -->
+  <div class="balloon-body" [style.background-color]="balloon.color">
+    <!-- Pixelated shine effect -->
+    <div class="balloon-shine"></div>
+    <!-- Balloon number -->
+  <!---  <div class="balloon-number">{{ balloon.number }}</div>-->
+  </div>
+  
+  <!-- Balloon string (pixelated line) -->
+  <div class="balloon-string"></div>
+  
+  <!-- Pop effect particles (shown during popping animation) -->
+  <div class="pop-effect" *ngIf="isPopping">
+    <div class="pop-particle pop-particle-1"></div>
+    <div class="pop-particle pop-particle-2"></div>
+    <div class="pop-particle pop-particle-3"></div>
+    <div class="pop-particle pop-particle-4"></div>
+    <div class="pop-particle pop-particle-5"></div>
+    <div class="pop-particle pop-particle-6"></div>
+    <div class="pop-particle pop-particle-7"></div>
+    <div class="pop-particle pop-particle-8"></div>
+  </div>
+</div>

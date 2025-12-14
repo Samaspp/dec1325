@@ -1,0 +1,545 @@
+/**
+ * BIRTHDAY HOME PAGE - EPIC GREEN MEADOW ANIME SHOWCASE
+ * 
+ * Design: Amazing birthday celebration with canvas-drawn anime characters
+ * - Blue gradient sky with animated clouds
+ * - Balloons floating in upper area
+ * - Green meadow at bottom with pixel art anime characters
+ * - Canvas-based character rendering (no emojis)
+ * - 22 anime characters doing personality-appropriate actions
+ */
+
+/* ==================== MAIN CONTAINER ==================== */
+.birthday-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* ==================== SKY LAYER ==================== */
+.sky-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.sky-gradient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    #1e3a5f 0%,
+    #3a6ea5 15%,
+    #5b9bd5 35%,
+    #87ceeb 55%,
+    #b8e2f2 70%,
+    #ffefd5 85%,
+    #ffcba4 95%,
+    #7bc96f 100%
+  );
+  animation: skyShift 30s ease-in-out infinite alternate;
+}
+
+@keyframes skyShift {
+  0% { filter: brightness(1) saturate(1); }
+  100% { filter: brightness(1.15) saturate(1.2); }
+}
+
+.cloud-layer {
+  position: absolute;
+  width: 100%;
+  height: 60%;
+  top: 0;
+  overflow: hidden;
+}
+
+.cloud {
+  position: absolute;
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.8) 40%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  animation: cloudFloat linear infinite;
+}
+
+.cloud-1 { width: 200px; height: 80px; top: 8%; left: -200px; animation-duration: 45s; }
+.cloud-2 { width: 150px; height: 60px; top: 15%; left: -150px; animation-duration: 55s; animation-delay: 10s; }
+.cloud-3 { width: 180px; height: 70px; top: 25%; left: -180px; animation-duration: 40s; animation-delay: 20s; }
+.cloud-4 { width: 220px; height: 85px; top: 5%; left: -220px; animation-duration: 60s; animation-delay: 5s; }
+.cloud-5 { width: 160px; height: 65px; top: 35%; left: -160px; animation-duration: 50s; animation-delay: 15s; }
+
+@keyframes cloudFloat {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(100vw + 300px)); }
+}
+
+/* ==================== BALLOONS LAYER ==================== */
+.balloons-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  z-index: 25;
+  pointer-events: all;
+}
+
+/* ==================== CONTENT OVERLAY ==================== */
+.content-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70%;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px 20px 20px;
+  pointer-events: none;
+}
+
+/* Only the interactive elements get pointer events */
+.content-overlay > * { 
+  pointer-events: auto;
+}
+
+/* Text elements don't block balloon clicks */
+.birthday-message { 
+  pointer-events: none;
+}
+
+.birthday-message * {
+  pointer-events: none;
+}
+
+/* ==================== BIRTHDAY MESSAGE ==================== */
+.birthday-message {
+  text-align: center;
+  margin-bottom: 40px;
+  margin-top: 20px;
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.8));
+}
+
+.epic-title {
+  font-size: 52px;
+  margin: 0 0 15px 0;
+  letter-spacing: 6px;
+  animation: titlePulse 3s ease-in-out infinite;
+  text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ffd700, 0 0 40px #ff00de, 4px 4px 0 #000, -2px -2px 0 #000;
+}
+
+.title-shine {
+  background: linear-gradient(90deg, #ffd700 0%, #ffed4e 25%, #fff 50%, #ffed4e 75%, #ffd700 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: shine 3s linear infinite;
+}
+
+@keyframes titlePulse {
+  0%, 100% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.03); filter: brightness(1.2); }
+}
+
+@keyframes shine { to { background-position: 200% center; } }
+
+.epic-name {
+  font-size: 68px;
+  margin: 0 0 20px 0;
+  letter-spacing: 10px;
+  background: linear-gradient(45deg, #ff0080, #ff8c00, #ffd700, #00ff00, #00ffff, #0080ff, #8000ff, #ff0080);
+  background-size: 400% 400%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: rainbowFlow 5s ease infinite;
+  filter: drop-shadow(0 0 25px rgba(255, 215, 0, 1)) drop-shadow(4px 4px 0 rgba(0, 0, 0, 0.8));
+}
+
+@keyframes rainbowFlow {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.epic-subtitle {
+  font-size: 16px;
+  color: #ffd700;
+  margin: 0 0 12px 0;
+  text-shadow: 2px 2px 0 #000, 0 0 10px #ffd700;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.epic-instruction {
+  font-size: 12px;
+  color: #00ffff;
+  margin: 0;
+  text-shadow: 2px 2px 0 #000, 0 0 10px #00ffff;
+  animation: blink 1.5s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* ==================== NAVIGATION BUTTON ==================== */
+.navigation-section { margin-bottom: 25px; }
+
+.epic-button {
+  position: relative;
+  background: linear-gradient(135deg, #ff0080 0%, #ff8c00 50%, #ffd700 100%);
+  border: 4px solid #fff;
+  border-radius: 8px;
+  padding: 18px 45px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 6px 0 #8b0000, 0 12px 25px rgba(0, 0, 0, 0.5), inset 0 2px 5px rgba(255, 255, 255, 0.5);
+  transition: all 0.2s ease;
+  overflow: hidden;
+  font-family: 'Press Start 2P', monospace;
+}
+
+.epic-button::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+  animation: buttonShine 3s linear infinite;
+}
+
+@keyframes buttonShine {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.button-glow {
+  position: relative;
+  z-index: 1;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.button-arrow {
+  margin-left: 10px;
+  font-size: 18px;
+  animation: arrowBounce 1s ease-in-out infinite;
+}
+
+@keyframes arrowBounce {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+}
+
+.epic-button:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 1), 0 10px 0 #8b0000, 0 18px 35px rgba(0, 0, 0, 0.6), inset 0 2px 5px rgba(255, 255, 255, 0.7);
+}
+
+.epic-button:active {
+  transform: translateY(3px);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.8), 0 3px 0 #8b0000, 0 6px 15px rgba(0, 0, 0, 0.5), inset 0 2px 5px rgba(255, 255, 255, 0.3);
+}
+
+/* ==================== STATS DISPLAY ==================== */
+.stats-display { margin-bottom: 15px; }
+
+.stat-card {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(20, 20, 40, 0.9) 100%);
+  border: 3px solid #ffd700;
+  border-radius: 8px;
+  padding: 12px 25px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), inset 0 0 15px rgba(255, 215, 0, 0.2);
+}
+
+.stat-icon {
+  font-size: 24px;
+  animation: iconPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes iconPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.stat-label {
+  font-size: 12px;
+  color: #ffd700;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.stat-value {
+  font-size: 20px;
+  color: #00ffff;
+  font-weight: bold;
+  text-shadow: 2px 2px 0 #000, 0 0 10px #00ffff;
+}
+
+/* ==================== GREEN MEADOW LAYER ==================== */
+.meadow-layer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  z-index: 15;
+  background: linear-gradient(180deg, #7bc96f 0%, #5cb85c 20%, #4cae4c 40%, #3d9140 60%, #2d7a2d 80%, #1e5f1e 100%);
+  border-top: 4px solid #2d5a27;
+  overflow: hidden;
+}
+
+.grass-texture {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(90deg, transparent 0px, transparent 8px, rgba(46, 139, 87, 0.3) 8px, rgba(46, 139, 87, 0.3) 10px), repeating-linear-gradient(180deg, transparent 0px, transparent 15px, rgba(34, 139, 34, 0.2) 15px, rgba(34, 139, 34, 0.2) 18px);
+  pointer-events: none;
+}
+
+.grass-highlights {
+  position: absolute;
+  width: 100%;
+  height: 30%;
+  top: 0;
+  background: linear-gradient(180deg, rgba(144, 238, 144, 0.4) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.meadow-flowers {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle 4px at 3% 20%, #ff6b6b 50%, transparent 50%),
+    radial-gradient(circle 4px at 8% 45%, #ff6b6b 50%, transparent 50%),
+    radial-gradient(circle 4px at 15% 25%, #ff6b6b 50%, transparent 50%),
+    radial-gradient(circle 4px at 22% 50%, #ff6b6b 50%, transparent 50%),
+    radial-gradient(circle 4px at 30% 30%, #ff6b6b 50%, transparent 50%),
+    radial-gradient(circle 4px at 38% 40%, #ff6b6b 50%, transparent 50%),
+    radial-gradient(circle 4px at 45% 20%, #ff6b6b 50%, transparent 50%),
+    radial-gradient(circle 4px at 52% 45%, #ff6b6b 50%, transparent 50%),
+    radial-gradient(circle 4px at 60% 25%, #ff6b6b 50%, transparent 50%),
+    radial-gradient(circle 4px at 68% 50%, #ff6b6b 50%, transparent 50%),
+    radial-gradient(circle 4px at 75% 30%, #ff6b6b 50%, transparent 50%),
+    radial-gradient(circle 4px at 82% 40%, #ff6b6b 50%, transparent 50%),
+    radial-gradient(circle 4px at 90% 20%, #ff6b6b 50%, transparent 50%),
+    radial-gradient(circle 4px at 95% 45%, #ff6b6b 50%, transparent 50%),
+    radial-gradient(circle 3px at 5% 35%, #ffd700 50%, transparent 50%),
+    radial-gradient(circle 3px at 12% 55%, #ffd700 50%, transparent 50%),
+    radial-gradient(circle 3px at 20% 30%, #ffd700 50%, transparent 50%),
+    radial-gradient(circle 3px at 28% 45%, #ffd700 50%, transparent 50%),
+    radial-gradient(circle 3px at 35% 25%, #ffd700 50%, transparent 50%),
+    radial-gradient(circle 3px at 42% 55%, #ffd700 50%, transparent 50%),
+    radial-gradient(circle 3px at 50% 30%, #ffd700 50%, transparent 50%),
+    radial-gradient(circle 3px at 58% 45%, #ffd700 50%, transparent 50%),
+    radial-gradient(circle 3px at 65% 25%, #ffd700 50%, transparent 50%),
+    radial-gradient(circle 3px at 72% 55%, #ffd700 50%, transparent 50%),
+    radial-gradient(circle 3px at 80% 30%, #ffd700 50%, transparent 50%),
+    radial-gradient(circle 3px at 88% 45%, #ffd700 50%, transparent 50%),
+    radial-gradient(circle 3px at 10% 40%, #fff 50%, transparent 50%),
+    radial-gradient(circle 3px at 25% 20%, #fff 50%, transparent 50%),
+    radial-gradient(circle 3px at 40% 55%, #fff 50%, transparent 50%),
+    radial-gradient(circle 3px at 55% 35%, #fff 50%, transparent 50%),
+    radial-gradient(circle 3px at 70% 20%, #fff 50%, transparent 50%),
+    radial-gradient(circle 3px at 85% 55%, #fff 50%, transparent 50%);
+}
+
+/* ==================== CHARACTER CANVAS ==================== */
+.character-canvas {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 50vh;
+  z-index: 20;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+  cursor: pointer;
+}
+
+/* Scrollbar styling for meadow */
+.meadow-layer::-webkit-scrollbar {
+  height: 8px;
+}
+
+.meadow-layer::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+}
+
+.meadow-layer::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #ffd700, #ff8c00);
+  border-radius: 4px;
+}
+
+.meadow-layer::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #ffed4e, #ffa500);
+}
+
+/* ==================== MEADOW TITLE ==================== */
+.meadow-title {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 25;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(30, 30, 60, 0.95) 100%);
+  border: 3px solid #ffd700;
+  border-radius: 20px;
+  padding: 8px 25px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6), 0 4px 15px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.meadow-title span {
+  font-size: 11px;
+  color: #ffd700;
+  text-shadow: 2px 2px 0 #000;
+  letter-spacing: 2px;
+}
+
+/* ==================== SUN DECORATION ==================== */
+.sky-layer::before {
+  content: '';
+  position: absolute;
+  top: 8%;
+  right: 10%;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, #fff9c4 0%, #ffd54f 30%, #ffb300 60%, transparent 70%);
+  border-radius: 50%;
+  box-shadow: 0 0 60px 20px rgba(255, 213, 79, 0.6), 0 0 100px 40px rgba(255, 179, 0, 0.3);
+  animation: sunGlow 4s ease-in-out infinite;
+}
+
+@keyframes sunGlow {
+  0%, 100% { box-shadow: 0 0 60px 20px rgba(255, 213, 79, 0.6), 0 0 100px 40px rgba(255, 179, 0, 0.3); }
+  50% { box-shadow: 0 0 80px 30px rgba(255, 213, 79, 0.8), 0 0 120px 50px rgba(255, 179, 0, 0.5); }
+}
+
+/* ==================== DISTANT HILLS ==================== */
+.sky-layer::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 15%;
+  background: 
+    radial-gradient(ellipse 300px 80px at 15% 100%, #6b8e6b 80%, transparent 80%),
+    radial-gradient(ellipse 400px 100px at 40% 100%, #5a7a5a 80%, transparent 80%),
+    radial-gradient(ellipse 350px 90px at 70% 100%, #6b8e6b 80%, transparent 80%),
+    radial-gradient(ellipse 280px 70px at 90% 100%, #5a7a5a 80%, transparent 80%);
+  pointer-events: none;
+}
+
+/* ==================== RESPONSIVE ==================== */
+@media (max-width: 768px) {
+  .epic-title { font-size: 32px; letter-spacing: 4px; }
+  .epic-name { font-size: 44px; letter-spacing: 6px; }
+  .epic-subtitle { font-size: 12px; }
+  .epic-instruction { font-size: 10px; }
+  .epic-button { font-size: 11px; padding: 14px 30px; }
+  .meadow-layer { height: 35%; }
+  .meadow-title { top: -30px; padding: 6px 18px; }
+  .meadow-title span { font-size: 9px; }
+  .stat-card { padding: 10px 18px; }
+  .stat-icon { font-size: 20px; }
+  .stat-label { font-size: 10px; }
+  .stat-value { font-size: 16px; }
+}
+
+@media (max-width: 480px) {
+  .epic-title { font-size: 24px; letter-spacing: 3px; }
+  .epic-name { font-size: 32px; letter-spacing: 4px; }
+  .epic-subtitle { font-size: 10px; }
+  .epic-instruction { font-size: 8px; }
+  .epic-button { font-size: 10px; padding: 12px 25px; }
+  .meadow-layer { height: 38%; }
+  .content-overlay { padding: 20px 15px; }
+}
+
+/* ==================== CHARACTER TOOLTIP ==================== */
+.character-tooltip {
+  position: fixed;
+  z-index: 100;
+  pointer-events: none;
+  animation: tooltipFadeIn 0.2s ease-out;
+}
+
+@keyframes tooltipFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.tooltip-content {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.98) 0%, rgba(30, 30, 60, 0.98) 100%);
+  border: 4px solid #ffd700;
+  border-radius: 12px;
+  padding: 16px 22px;
+  min-width: 240px;
+  max-width: 320px;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.9), 
+    0 0 30px rgba(255, 215, 0, 0.8),
+    inset 0 0 20px rgba(255, 215, 0, 0.15);
+}
+
+.tooltip-name {
+  font-size: 14px;
+  color: #ffd700;
+  margin: 0 0 8px 0;
+  text-shadow: 
+    2px 2px 0 #000,
+    0 0 15px #ffd700;
+  letter-spacing: 1.5px;
+  font-weight: bold;
+}
+
+.tooltip-anime {
+  font-size: 11px;
+  color: #00ffff;
+  margin: 0 0 12px 0;
+  text-shadow: 
+    1px 1px 0 #000,
+    0 0 10px #00ffff;
+}
+
+.tooltip-quote {
+  font-size: 10px;
+  color: #ff69b4;
+  margin: 0;
+  font-style: italic;
+  text-shadow: 
+    1px 1px 0 #000,
+    0 0 8px #ff69b4;
+  line-height: 1.5;
+  border-top: 2px solid rgba(255, 215, 0, 0.4);
+  padding-top: 10px;
+}

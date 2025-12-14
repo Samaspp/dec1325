@@ -1,0 +1,629 @@
+/**
+ * LETTER SCROLL STYLES
+ * 
+ * LLD: Minecraft-inspired pixelated scroll design
+ * 
+ * Design Elements:
+ * 1. Pixelated game background
+ * 2. Old parchment scroll effect
+ * 3. Pixelated character sprite (hoodie guy)
+ * 4. Interactive heart button
+ * 5. Floating decorations
+ * 
+ * Color Palette:
+ * - Parchment: #f4e4c1, #e8d4a0
+ * - Dark complexion: #8b6f47, #6b5744
+ * - Black hoodie: #1a1a1a, #2d2d2d
+ * - Heart: #ff1744, #e91e63
+ */
+
+/* =================================
+   PAGE CONTAINER
+   ================================= */
+
+.letter-page {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #2c1810;
+  
+  /* Pixelated rendering */
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* =================================
+   MINECRAFT-STYLE BACKGROUND
+   ================================= */
+
+.minecraft-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(135deg, #3a2a1a 0%, #2c1810 50%, #1a0f08 100%);
+  z-index: 1;
+}
+
+.pixel-pattern {
+  width: 100%;
+  height: 100%;
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 16px,
+      rgba(0, 0, 0, 0.1) 16px,
+      rgba(0, 0, 0, 0.1) 17px
+    ),
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 16px,
+      rgba(0, 0, 0, 0.1) 16px,
+      rgba(0, 0, 0, 0.1) 17px
+    );
+  animation: patternScroll 40s linear infinite;
+}
+
+@keyframes patternScroll {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(16px, 16px);
+  }
+}
+
+/* =================================
+   SCROLL/PARCHMENT
+   ================================= */
+
+.scroll-container {
+  position: relative;
+  width: 700px;
+  max-width: 90%;
+  margin: 40px auto 200px;
+  z-index: 10;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.5));
+}
+
+.scroll-top {
+  height: 30px;
+  background: 
+    linear-gradient(180deg, #d4c4a0 0%, #f4e4c1 100%);
+  border: 4px solid #8b7355;
+  border-bottom: none;
+  position: relative;
+  
+  /* Torn edge effect (pixelated) */
+  clip-path: polygon(
+    0 0, 10% 0, 10% 8px, 15% 8px, 15% 0,
+    25% 0, 25% 6px, 30% 6px, 30% 0,
+    40% 0, 40% 10px, 45% 10px, 45% 0,
+    55% 0, 55% 8px, 60% 8px, 60% 0,
+    70% 0, 70% 12px, 75% 12px, 75% 0,
+    85% 0, 85% 6px, 90% 6px, 90% 0,
+    100% 0, 100% 100%, 0 100%
+  );
+}
+
+.scroll-content {
+  background: #f4e4c1;
+  border-left: 4px solid #8b7355;
+  border-right: 4px solid #8b7355;
+  padding: 40px;
+  min-height: 400px;
+  max-height: 600px;
+  overflow-y: auto;
+  
+  /* Parchment texture */
+  background-image: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(139, 115, 85, 0.03) 2px,
+      rgba(139, 115, 85, 0.03) 4px
+    );
+    
+  /* Custom scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: #8b7355 #f4e4c1;
+}
+
+.scroll-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-content::-webkit-scrollbar-track {
+  background: #e8d4a0;
+}
+
+.scroll-content::-webkit-scrollbar-thumb {
+  background: #8b7355;
+  border-radius: 0;
+}
+
+.scroll-bottom {
+  height: 30px;
+  background: 
+    linear-gradient(0deg, #d4c4a0 0%, #f4e4c1 100%);
+  border: 4px solid #8b7355;
+  border-top: none;
+  
+  /* Torn edge effect (pixelated) */
+  clip-path: polygon(
+    0 0, 100% 0, 100% 100%,
+    90% 100%, 90% calc(100% - 6px), 85% calc(100% - 6px), 85% 100%,
+    75% 100%, 75% calc(100% - 12px), 70% calc(100% - 12px), 70% 100%,
+    60% 100%, 60% calc(100% - 8px), 55% calc(100% - 8px), 55% 100%,
+    45% 100%, 45% calc(100% - 10px), 40% calc(100% - 10px), 40% 100%,
+    30% 100%, 30% calc(100% - 6px), 25% calc(100% - 6px), 25% 100%,
+    15% 100%, 15% calc(100% - 8px), 10% calc(100% - 8px), 10% 100%,
+    0 100%
+  );
+}
+
+/* =================================
+   LETTER CONTENT
+   ================================= */
+
+.pixel-text {
+  font-family: 'Courier New', 'Press Start 2P', monospace;
+  image-rendering: pixelated;
+  color: #2d1a0f;
+}
+
+.letter-greeting {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 0 rgba(139, 115, 85, 0.3);
+}
+
+.letter-body {
+  margin: 20px 0;
+}
+
+.letter-paragraph {
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  text-align: justify;
+  white-space: pre-wrap;
+}
+
+.letter-signature {
+  font-size: 16px;
+  font-style: italic;
+  margin-top: 40px;
+  text-align: right;
+  white-space: pre-line;
+}
+
+/* =================================
+   PIXELATED CHARACTER
+   ================================= */
+
+.character-sidebar {
+  position: fixed;
+  left: 40px;
+  bottom: 100px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.pixel-character {
+  width: 120px;
+  height: 180px;
+  position: relative;
+  animation: characterIdle 2s ease-in-out infinite;
+}
+
+.pixel-character.animating {
+  animation: characterBreath 1s ease-in-out;
+}
+
+@keyframes characterIdle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes characterBreath {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+/* Character head */
+.character-head {
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+}
+
+/* Hair (black) */
+.character-hair {
+  position: absolute;
+  width: 48px;
+  height: 16px;
+  background: #1a1a1a;
+  top: 0;
+  box-shadow: 
+    0 -8px 0 0 #1a1a1a,
+    8px 0 0 0 #1a1a1a,
+    -8px 0 0 0 #1a1a1a;
+}
+
+/* Face (wheatish-dark complexion) */
+.character-face {
+  position: absolute;
+  width: 40px;
+  height: 32px;
+  background: #8b6f47;
+  top: 16px;
+  left: 4px;
+  box-shadow: 
+    8px 0 0 0 #6b5744,
+    -8px 0 0 0 #6b5744;
+}
+
+/* Eyes */
+.character-face::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #2d1a0f;
+  top: 8px;
+  left: 8px;
+  box-shadow: 18px 0 0 0 #2d1a0f;
+}
+
+/* Trimmed Beard - close to skin */
+.character-beard {
+  position: absolute;
+  width: 40px;
+  height: 16px;
+  background: #1a1a1a;
+  top: 36px;
+  left: 4px;
+  box-shadow: 
+    0 8px 0 0 #1a1a1a,
+    -8px 4px 0 0 #1a1a1a,
+    8px 4px 0 0 #1a1a1a;
+}
+
+/* Trimmed Mustache - close to skin */
+.character-mustache {
+  position: absolute;
+  width: 24px;
+  height: 6px;
+  background: #1a1a1a;
+  top: 30px;
+  left: 12px;
+}
+
+/* Oversized hoodie body */
+.character-body {
+  position: absolute;
+  width: 96px;
+  height: 96px;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 56px;
+}
+
+.hoodie {
+  position: absolute;
+  width: 96px;
+  height: 80px;
+  background: #1a1a1a;
+  top: 0;
+  border: 2px solid #000;
+  box-shadow: 
+    inset 0 0 0 4px #2d2d2d,
+    0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+/* Hood */
+.hoodie::before {
+  content: '';
+  position: absolute;
+  width: 48px;
+  height: 24px;
+  background: #1a1a1a;
+  top: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 2px solid #000;
+  border-bottom: none;
+}
+
+.hoodie-pocket {
+  position: absolute;
+  width: 48px;
+  height: 32px;
+  background: #0d0d0d;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 2px solid #000;
+}
+
+/* Arms */
+.character-arms {
+  position: absolute;
+  width: 120px;
+  top: 64px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.arm-left,
+.arm-right {
+  position: absolute;
+  width: 24px;
+  height: 64px;
+  background: #1a1a1a;
+  border: 2px solid #000;
+}
+
+.arm-left {
+  left: 0;
+  animation: armSwingLeft 2s ease-in-out infinite;
+}
+
+.arm-right {
+  right: 0;
+  animation: armSwingRight 2s ease-in-out infinite;
+}
+
+@keyframes armSwingLeft {
+  0%, 100% {
+    transform: rotate(-5deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes armSwingRight {
+  0%, 100% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+}
+
+/* =================================
+   HEART BUTTON
+   ================================= */
+
+.heart-button {
+  cursor: pointer;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.heart-button:hover {
+  transform: scale(1.1);
+}
+
+.heart-button:active {
+  transform: scale(0.95);
+}
+
+.pixel-heart {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  margin: 0 auto 10px;
+  animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartBeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.1);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.1);
+  }
+  56% {
+    transform: scale(1);
+  }
+}
+
+/* Pixel heart rows - proper heart shape */
+.heart-row {
+  position: absolute;
+  background: #ff1744;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px rgba(255, 23, 68, 0.5);
+}
+
+/* Top of heart - two rounded bumps */
+.heart-row-1 {
+  width: 16px;
+  height: 16px;
+  top: 0;
+  left: 24px;
+  box-shadow: 
+    32px 0 0 0 #ff1744,
+    0 0 10px rgba(255, 23, 68, 0.5);
+}
+
+/* Second row - wider */
+.heart-row-2 {
+  width: 64px;
+  height: 16px;
+  top: 16px;
+}
+
+/* Third row - widest part */
+.heart-row-3 {
+  width: 64px;
+  height: 16px;
+  top: 32px;
+}
+
+/* Fourth row - narrowing */
+.heart-row-4 {
+  width: 48px;
+  height: 16px;
+  top: 48px;
+}
+
+/* Bottom point */
+.heart-row-5 {
+  width: 16px;
+  height: 16px;
+  top: 64px;
+}
+
+.heart-label {
+  font-size: 12px;
+  color: #ff1744;
+  text-shadow: 
+    1px 1px 0 #000,
+    0 0 10px #ff1744;
+  animation: labelPulse 1s ease-in-out infinite;
+}
+
+@keyframes labelPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* =================================
+   FLOATING DECORATIONS
+   ================================= */
+
+.decorations {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.floating-heart {
+  position: absolute;
+  font-size: 32px;
+  color: #ff1744;
+  opacity: 0.6;
+  animation: floatHeart 8s ease-in-out infinite;
+}
+
+.floating-heart-1 {
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.floating-heart-2 {
+  left: 80%;
+  animation-delay: 2s;
+}
+
+.floating-heart-3 {
+  left: 50%;
+  animation-delay: 4s;
+}
+
+@keyframes floatHeart {
+  0% {
+    top: 100%;
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.6;
+  }
+  90% {
+    opacity: 0.6;
+  }
+  100% {
+    top: -10%;
+    transform: translateY(0) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* =================================
+   RESPONSIVE DESIGN
+   ================================= */
+
+@media (max-width: 768px) {
+  .scroll-container {
+    width: 95%;
+    margin: 20px auto 180px;
+  }
+  
+  .scroll-content {
+    padding: 20px;
+    max-height: 500px;
+  }
+  
+  .letter-greeting {
+    font-size: 18px;
+  }
+  
+  .letter-paragraph {
+    font-size: 12px;
+  }
+  
+  .letter-signature {
+    font-size: 14px;
+  }
+  
+  .pixel-character {
+    transform: scale(0.8);
+  }
+  
+  .character-container {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pixel-character {
+    transform: scale(0.6);
+  }
+  
+  .pixel-heart {
+    transform: scale(0.8);
+  }
+}
