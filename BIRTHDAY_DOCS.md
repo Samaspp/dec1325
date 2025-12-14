@@ -1,4 +1,4 @@
-# 🎂 Joy's 29th Birthday Celebration Platform
+# Birthday Celebration Platform
 
 A creative, interactive birthday celebration web application built with **pure Angular** and featuring a stunning **pixelated art aesthetic**. This project showcases advanced physics simulations, reusable component architecture, and modern Angular best practices.
 
@@ -453,7 +453,7 @@ public class Balloon
 
 ## 👤 Author
 
-**Built with ❤️ for Joy's 29th Birthday**
+**Built with ❤️ for Birthday**
 
 Project created with pure Angular, showcasing:
 - Clean architecture
@@ -477,4 +477,4 @@ This project is a custom birthday celebration. Feel free to fork and adapt for y
 
 ---
 
-**Happy Birthday Joy! 🎂🎈🎉**
+**Happy Birthday J! 🎂🎈🎉**
