@@ -674,7 +674,7 @@ export class HogwartsFlyingComponent implements OnInit, OnDestroy, AfterViewInit
     ctx.fillStyle = '#FFD700';
     ctx.font = 'bold 20px Georgia';
     ctx.textAlign = 'center';
-    ctx.fillText('Player: Kiyoshi Jasper', 225, 550);
+    ctx.fillText('Player: Kiyoshi Jazper', 225, 550);
     
     // Gifts collected
     ctx.font = '18px Georgia';
