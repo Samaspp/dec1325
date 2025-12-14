@@ -43,4 +43,4 @@ __screenshots__/
 Thumbs.db
 
 # Private content (uncomment to keep letter private)
-# src/app/config/letter.config.ts
+src/app/config/letter.config.ts
